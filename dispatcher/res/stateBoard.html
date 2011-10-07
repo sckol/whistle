@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>A simple frameset document</title>
+	<style type="text/css" src="reset.css"/>
+    <style type="text/css">
+      html, body {
+      height: 100%;
+      }
+	  .iconsvg {
+	  	height: 50;
+	  }
+	  .manCount {
+	  	text-align:center;
+		font-size:22px;
+	  }
+    </style>
+
+  </head>
+  <body style="font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;">
+    <div id="ok" style="background-color:#00ff00;height:100%;">
+		<div>No emergency situation detected.</div>
+		<div style="font-style:italic;">Last integrity check: <span>17:10:11</span></div>
+		<table width="100%" border="0">
+			<tr>
+				<td width="50%"><a href="http://localhost:8080/declareGasAttack"><img class="iconsvg" src="img/gas.svg"></img></a></td>
+				<td><a href="http://localhost:8080/declareGasAttack">Declare a gas attack</a></td>
+			</tr>
+		</table>
+	</div>
+    <div id="emergency" style="background-color:#ff0000;height:100%;display:none;" class="">
+			<img src="img/caution.svg" width="30" />
+			<span style="font-weight:bold; font-size:22px;">Attention!</span>
+			<div style="font-size:18px;">Fire in the room #21.</div>
+			<table width="100%" style="margin-top:20;">
+				<tr>
+					<td width="50%"><img class="iconsvg" src="img/man.svg" /></td>
+					<td id="numberOfUsers" class="manCount">—</td>
+				</tr>
+				<tr>
+					<td><img class="iconsvg" src="img/invalid.svg" /></td>
+					<td id="numberOfInvalids" class="manCount">—</td>
+				</tr>
+				<tr>
+					<td><img class="iconsvg" src="img/blind.svg" /></td>
+					<td id="numberOfBlinds" class="manCount">—</td>
+					</tr>
+				<tr>
+					<td>
+					Employee:
+					</td>
+					<td />		
+				</tr>
+				<tr>
+					<td style="border-bottom:1px solid black; border-top:1px solid black;"><img style="height:70" src="img/security.svg" /></td>
+					<td style="border-bottom:1px solid black; border-top:1px solid black; font-size:18px; text-align:right;">Ivan Petrov, engineer</td>
+				</tr>
+			</table>
+	</div> 
+  </body>
+</html>

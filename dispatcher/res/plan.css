@@ -1,0 +1,4 @@
+@import "jquery.svg.css";
+.sensor_green {fill:#00ff00;}
+.sensor_red {fill:#ff0000;}
+.sensor_flashing {fill:#ff0000;}

@@ -1,0 +1,12 @@
+MIDlet-1: Тревога! Нажмите "Старт" ↓↓↓,/fire-icon.png,ru.niir.protowhistle.ui.NotifyMidlet
+MIDlet-Jar-URL: protowhistle.jar
+Nokia-MIDlet-auto-start: yes
+MIDlet-Push-3: sms://:50044,ru.niir.protowhistle.ui.NotifyMidlet,*
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Push-2: sms://:50043,ru.niir.protowhistle.ui.NotifyMidlet,*
+MIDlet-Push-1: sms://:50042,ru.niir.protowhistle.ui.NotifyMidlet,*
+MIDlet-Version: 0.2.0
+MIDlet-Vendor: FSUE NIIR
+MIDlet-Name: Safety system
+MicroEdition-Profile: MIDP-2.1
+MIDlet-Permissions: javax.microedition.io.PushRegistry,javax.microedition.io.Connector.sms,javax.wireless.messaging.sms.receive,javax.microedition.io.Connector.file.read,javax.microedition.io.Connector.bluetooth.client
