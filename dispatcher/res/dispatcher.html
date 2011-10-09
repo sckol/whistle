@@ -1,37 +1,40 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 FRAMESET//EN"
-   "http://www.w3.org/TR/html4/frameset.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 FRAMESET//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 <html>
-<head>
-<title>Monitoring of the emergency system</title>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="jquery.svg.js"></script>
-<script type="text/javascript" src="jquery.svgdom.js"></script>
-<script type="text/javascript" src="jquery.svganim.js"></script>
-
-	<script type="text/javascript">
-	function scroll() {
-	    $('.sensor_flashing', top.frames["plan"].document).animate({
-		opacity: 0.0
-	    } , 300, function() {});
-	    $('.sensor_flashing', top.frames["plan"].document).animate({
-		opacity: 1
-	    } , 300, scroll);
-	}
-
-       $(document).ready(function() {
-	   $('#plan').load(function() {     
-	       scroll();
-	   });
-       });
-
-</script>
-<script type="text/JavaScript">
-  window.onload=setTimeout("location.reload(true);",1000);
-</script>
-
-</head>
-<frameset cols="80%, 20%">
-  <frame id="plan" name="plan" src="http://localhost:8080/plan.svg" >
-  <frame id="state" name="state" src="http://localhost:8080/stateBoard.html">
-</frameset>
+  <head>
+    <title>Monitoring of the emergency system</title>
+    <link rel="stylesheet" href="reset.css">
+    </style>
+    <script type="text/javascript" src="jquery.js">
+    </script>
+    <script type="text/javascript" src="jquery.svg.js">
+    </script>
+    <script type="text/javascript" src="jquery.svgdom.js">
+    </script>
+    <script type="text/javascript" src="jquery.svganim.js">
+    </script>
+    <script type="text/javascript">
+      function scroll(){
+          $('.sensor_flashing', top.frames["plan"].document).animate({
+              opacity: 0.0
+          }, 300, function(){
+          });
+          $('.sensor_flashing', top.frames["plan"].document).animate({
+              opacity: 1
+          }, 300, scroll);
+      }
+      
+      $(document).ready(function(){
+          $('#plan').load(function(){
+              scroll();
+          });
+      });
+      
+    </script>
+    <script type="text/JavaScript">
+      window.onload=setTimeout("location.reload(true);",1000);
+    </script>
+  </head>
+  <frameset cols="80%, 20%">
+    <frame id="plan" name="plan" src="plan.svg"><frame id="state" name="state" src="stateBoard.html">
+  </frameset>
 </html>

@@ -20,6 +20,8 @@ import org.jdom.output.XMLOutputter;
 import ru.niir.dispatcher.events.DispatcherEvent;
 import ru.niir.dispatcher.services.filters.CategoryCountFilter;
 import ru.niir.dispatcher.services.filters.EmergencyStateBoardFilter;
+import ru.niir.dispatcher.services.filters.EmergencyTypeFilter;
+import ru.niir.dispatcher.services.filters.EmployeeFilter;
 import ru.niir.dispatcher.services.filters.HtmlFilter;
 import ru.niir.dispatcher.services.filters.OkStateBoardFilter;
 
@@ -37,6 +39,8 @@ public class StateBoardService extends HttpServlet implements DispatcherService 
 		filters.add(new OkStateBoardFilter(doc));
 		filters.add(new EmergencyStateBoardFilter(doc));
 		filters.add(new CategoryCountFilter(doc));
+		filters.add(new EmployeeFilter(doc));
+		filters.add(new EmergencyTypeFilter(doc));
 	}
 
 	@Override
@@ -46,9 +50,9 @@ public class StateBoardService extends HttpServlet implements DispatcherService 
 			if (filter.onEvent(_event))
 				somethingChanged = true;
 		}
-//		if (somethingChanged) writeFile();
+		// if (somethingChanged) writeFile();
 	}
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {

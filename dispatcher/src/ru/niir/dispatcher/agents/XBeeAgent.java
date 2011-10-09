@@ -48,19 +48,22 @@ public class XBeeAgent implements Runnable {
 
 	private int getButtonPressed(final ZNetRxIoSampleResponse resp) {
 		if (resp.containsDigital()) {
-		if (!resp.isDigitalOn(2) && resp.isDigitalOn(1) && resp.isDigitalOn(0))
-			return 3;
-		else if (!resp.isDigitalOn(1) && resp.isDigitalOn(2)
-				&& resp.isDigitalOn(0))
-			return 2;
-		else if (!resp.isDigitalOn(0) && resp.isDigitalOn(2)
-				&& resp.isDigitalOn(1))
-			return 1;
-		return 0;
-		}
-		else {
-			System.out.println("ANALOG: " + resp.getAnalog1());
+			if (!resp.isDigitalOn(2) && resp.isDigitalOn(1)
+					&& resp.isDigitalOn(0))
+				return 3;
+			else if (!resp.isDigitalOn(1) && resp.isDigitalOn(2)
+					&& resp.isDigitalOn(0))
+				return 2;
+			else if (!resp.isDigitalOn(0) && resp.isDigitalOn(2)
+					&& resp.isDigitalOn(1))
+				return 1;
 			return 0;
+		} else {
+			System.out.println("ANALOG: " + resp.getAnalog1());
+			if (resp.getAnalog1() < 250)
+				return 1;
+			else
+				return 0;
 		}
 	}
 

@@ -22,12 +22,15 @@ public class StateChangedEvent implements DispatcherEvent {
 		return oldState;
 	}
 
+	public EmergencyType getType() {
+		return type;
+	}
+
 	@Override
 	public String toString() {
 		return "StateChangedEvent (newState=" + newState + ", oldState="
 				+ oldState + ", type=" + type + ", reason=\"" + reason + "\")";
 	}
-
 	public enum EmergencyType {
 		FIRE, GAS_ATTACK
 	}

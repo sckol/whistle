@@ -22,7 +22,7 @@ public class ExternalEmergencyAgent extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		eventBus.fireEvent(new StateChangedEvent(3, 0, EmergencyType.GAS_ATTACK, "Gas atack"));
+		eventBus.fireEvent(new StateChangedEvent(1, 0, EmergencyType.GAS_ATTACK, "Gas atack"));
 		resp.setStatus(HttpServletResponse.SC_OK);
 	}
 }

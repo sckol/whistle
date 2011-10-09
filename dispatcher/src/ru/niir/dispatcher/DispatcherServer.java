@@ -60,72 +60,29 @@ public class DispatcherServer {
 		server.setHandler(handlerList);
 		server.start();
 		
-		final XBee xbee = new XBee(
-				new XBeeConfiguration().withStartupChecks(false));
-		xbee.open(conf.getProperty("XBee.comPort"),
-				Integer.parseInt(conf.getProperty("XBee.baudRate")));
-		new Thread(new XBeeAgent(bus, xbee)).start();
-		final XBeeScannerService xbeeScannerService = new XBeeScannerService(
-				bus, xbee, Integer.parseInt(conf
-						.getProperty("XbeeScannerService.timeout")));
-		bus.addListener(xbeeScannerService);
-		final Timer scannerTimer = new Timer();
-		scannerTimer.schedule(xbeeScannerService.getTimerTask(), 0,
-				Long.parseLong(conf
-						.getProperty("XbeeScannerService.scanFrequency")));
-		final Service service = Service.getInstance();
-		SerialModemGateway gateway = new SerialModemGateway("modem", "COM1",
-				9600, "Siemens", "MC35i");
-		gateway.setOutbound(true);
-		service.addGateway(gateway);
-		service.startService();
-		System.out.println("helllloooo");
-		final SmsService smsService = new SmsService(service);
-		smsService.addPhone(new Phone("+79851980192", 50042, 1, 0));
-		bus.addListener(smsService);
+//		final XBee xbee = new XBee(
+//				new XBeeConfiguration().withStartupChecks(false));
+//		xbee.open(conf.getProperty("XBee.comPort"),
+//				Integer.parseInt(conf.getProperty("XBee.baudRate")));
+//		new Thread(new XBeeAgent(bus, xbee)).start();
+//		final XBeeScannerService xbeeScannerService = new XBeeScannerService(
+//				bus, xbee, Integer.parseInt(conf
+//						.getProperty("XbeeScannerService.timeout")));
+//		bus.addListener(xbeeScannerService);
+//		final Timer scannerTimer = new Timer();
+//		scannerTimer.schedule(xbeeScannerService.getTimerTask(), 0,
+//				Long.parseLong(conf
+//						.getProperty("XbeeScannerService.scanFrequency")));
+//		final Service service = Service.getInstance();
+//		SerialModemGateway gateway = new SerialModemGateway("modem", "COM1",
+//				9600, "Siemens", "MC35i");
+//		gateway.setOutbound(true);
+//		service.addGateway(gateway);
+//		service.startService();
+//		System.out.println("helllloooo");
+//		final SmsService smsService = new SmsService(service);
+//		smsService.addPhone(new Phone("+79851980192", 50042, 1, 0));
+//		bus.addListener(smsService);
 		bus.fireEvent(new ResetEvent());
-		// Document svg = new SAXBuilder().build(FILE);
-		// System.out.println(svg.getRootElement());
-		// for (int i = 0; i < SENSOR_COUNT; i++) {
-		// CIRCLES[i] = (Element) XPath.selectSingleNode(svg,
-		// "//svg:path[@id='sensor" + i + "']");
-		// setCircle(i, false);
-		// }
-		// updateFile(svg);
-		//
-		// XBee xbee = new XBee(new
-		// XBeeConfiguration().withStartupChecks(false));
-		// xbee.open("COM12", 9600);
-		// final Reseter reseter = new Reseter();
-		// new Thread(reseter).start();
-		// System.out.println("Ready");
-		// while (true) {
-		// XBeeResponse ioSample = xbee.getResponse();
-		// if (ioSample instanceof ZNetRxIoSampleResponse) {
-		// final int state = getState((ZNetRxIoSampleResponse) ioSample);
-		// setCircle(0, !((ZNetRxIoSampleResponse) ioSample).isDigitalOn(2) ||
-		// !((ZNetRxIoSampleResponse) ioSample).isDigitalOn(1) ||
-		// !((ZNetRxIoSampleResponse) ioSample).isDigitalOn(0));
-		// updateFile(svg);
-		// if (state > reseter.getState()) {
-		// reseter.setState(state);
-		// for (int i = 0; i < NUMBERS.length; i++) {
-		// //Speed up
-		// final String number = (state == 0) ? NUMBERS[NUMBERS.length - 1 - i]
-		// : NUMBERS[i];
-		// //
-		// System.out.println("Sending");
-		// final OutboundMessage message = new OutboundMessage(
-		// number, String.valueOf(state));
-		// message.setSrcPort(0);
-		// message.setDstPort(number.equals(NOKIA_NUMBER) ? NOKIA_BASE_PORT+
-		// state : BASE_PORT + state);
-		// message.setFlashSms(true);
-		// //service.sendMessage(message);
-		// System.out.println("Sent");
-		// }
-		// }
-		// }
-		// }
 	}
 }

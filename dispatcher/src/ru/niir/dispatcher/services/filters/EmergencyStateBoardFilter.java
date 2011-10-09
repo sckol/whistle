@@ -9,7 +9,7 @@ import ru.niir.dispatcher.events.StateChangedEvent;
 
 public class EmergencyStateBoardFilter extends HtmlFilter {
 	public EmergencyStateBoardFilter(final Document doc) throws JDOMException {
-		super(doc, "//div[@id=\"emergency\"]");
+		super(doc, "//div[@id='emergency']");
 	}
 	
 	@Override

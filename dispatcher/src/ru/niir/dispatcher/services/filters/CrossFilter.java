@@ -6,6 +6,7 @@ import org.jdom.JDOMException;
 import ru.niir.dispatcher.events.DispatcherEvent;
 import ru.niir.dispatcher.events.ResetEvent;
 import ru.niir.dispatcher.events.ScannerResultsEvent;
+import ru.niir.dispatcher.events.SensorChangedEvent;
 
 public class CrossFilter extends HtmlFilter {
 	public CrossFilter(final Document doc) throws JDOMException {
@@ -20,6 +21,11 @@ public class CrossFilter extends HtmlFilter {
 				return switchVisible(false);
 			else
 				return switchVisible(true);
+		} else if (_event instanceof SensorChangedEvent) {
+			final SensorChangedEvent event = (SensorChangedEvent) _event;
+			if (event.getSensorId().equals(getNodeId())) {
+				return switchVisible(false);
+			} else return false;
 		} else if (_event instanceof ResetEvent) {
 			return switchVisible(false);
 		} else
