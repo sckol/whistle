@@ -47,8 +47,8 @@ public class WebSocketService extends WebSocketServlet implements
 		}
 
 		@Override
-		public void onOpen(final Connection connection) {
-			this.connection = connection;
+		public void onOpen(final Connection conn) {
+			this.connection = conn;
 			members.add(connection);
 		}
 	}

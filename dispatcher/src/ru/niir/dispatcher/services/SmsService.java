@@ -32,24 +32,30 @@ public class SmsService implements DispatcherService {
 			while (iterator.hasNext()) {
 				Phone phone = iterator.next();
 				final OutboundMessage message = new OutboundMessage(
-						phone.getNumber(), String.valueOf(event.getNewState()));
+						phone.getNumber(), "(emergency 0 "
+								+ (event.getNewState() - 1) + ")");
 				message.setSrcPort(0);
 				message.setDstPort(phone.getPort());
 				message.setFlashSms(true);
-				try {
-					if (service.sendMessage(message))
-						System.out.println("Message sent");
-					else
-						System.out.println("Message was not sent!");
-				} catch (TimeoutException e) {
-					e.printStackTrace();
-				} catch (GatewayException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							if (service.sendMessage(message))
+								System.out.println("Message sent");
+							else
+								System.out.println("Message was not sent!");
+						} catch (TimeoutException e) {
+							e.printStackTrace();
+						} catch (GatewayException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}).start();
 			}
 		}
 	}

@@ -63,29 +63,29 @@ public class DispatcherServer {
 		handlerList.addHandler(resourceHandler);
 		server.setHandler(handlerList);
 		server.start();
-		// final XBee xbee = new XBee(
-		// new XBeeConfiguration().withStartupChecks(false));
-		// xbee.open(conf.getProperty("XBee.comPort"),
-		// Integer.parseInt(conf.getProperty("XBee.baudRate")));
-		// new Thread(new XBeeAgent(bus, xbee)).start();
-		// final XBeeScannerService xbeeScannerService = new XBeeScannerService(
-		// bus, xbee, Integer.parseInt(conf
-		// .getProperty("XbeeScannerService.timeout")));
-		// bus.addListener(xbeeScannerService);
-		// final Timer scannerTimer = new Timer();
-		// scannerTimer.schedule(xbeeScannerService.getTimerTask(), 0,
-		// Long.parseLong(conf
-		// .getProperty("XbeeScannerService.scanFrequency")));
-		// final Service service = Service.getInstance();
-		// SerialModemGateway gateway = new SerialModemGateway("modem", "COM1",
-		// 9600, "Siemens", "MC35i");
-		// gateway.setOutbound(true);
-		// service.addGateway(gateway);
-		// service.startService();
-		// System.out.println("helllloooo");
-		// final SmsService smsService = new SmsService(service);
-		// smsService.addPhone(new Phone("+79851980192", 50042, 1, 0));
-		// bus.addListener(smsService);
+		final XBee xbee = new XBee(
+				new XBeeConfiguration().withStartupChecks(false));
+		xbee.open(conf.getProperty("XBee.comPort"),
+				Integer.parseInt(conf.getProperty("XBee.baudRate")));
+		new Thread(new XBeeAgent(bus, xbee)).start();
+		final XBeeScannerService xbeeScannerService = new XBeeScannerService(
+				bus, xbee, Integer.parseInt(conf
+						.getProperty("XbeeScannerService.timeout")));
+		bus.addListener(xbeeScannerService);
+		final Timer scannerTimer = new Timer();
+		scannerTimer.schedule(xbeeScannerService.getTimerTask(), 0,
+				Long.parseLong(conf
+						.getProperty("XbeeScannerService.scanFrequency")));
+		final Service service = Service.getInstance();
+		SerialModemGateway gateway = new SerialModemGateway("modem", "COM1",
+				9600, "Siemens", "MC35i");
+		gateway.setOutbound(true);
+		service.addGateway(gateway);
+		service.startService();
+		System.out.println("helllloooo");
+		final SmsService smsService = new SmsService(service);
+		smsService.addPhone(new Phone("+79851980192", 50042, 1, 0));
+		bus.addListener(smsService);
 		bus.fireEvent(new ResetEvent());
 	}
 }
