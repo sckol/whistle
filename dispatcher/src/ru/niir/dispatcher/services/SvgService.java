@@ -1,8 +1,6 @@
 package ru.niir.dispatcher.services;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,19 +15,24 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 
+import ru.niir.dispatcher.EventBus;
+import ru.niir.dispatcher.events.ContentChangedEvent;
 import ru.niir.dispatcher.events.DispatcherEvent;
 import ru.niir.dispatcher.services.filters.CrossFilter;
 import ru.niir.dispatcher.services.filters.HtmlFilter;
 import ru.niir.dispatcher.services.filters.SensorCircleFilter;
 
+@SuppressWarnings("serial")
 public class SvgService extends HttpServlet implements DispatcherService {
 	private final File file;
 	private final Document doc;
 	private final XMLOutputter outputter = new XMLOutputter();
 	private final List<HtmlFilter> filters = new ArrayList<HtmlFilter>();
+	private final EventBus eventBus;
 
-	public SvgService(final String fileName) throws JDOMException, IOException {
+	public SvgService(final EventBus eventBus, final String fileName) throws JDOMException, IOException {
 		super();
+		this.eventBus = eventBus;
 		this.file = new File(fileName);
 		doc = new SAXBuilder().build(file);
 		filters.add(new SensorCircleFilter(doc));
@@ -43,7 +46,7 @@ public class SvgService extends HttpServlet implements DispatcherService {
 			if (filter.onEvent(_event))
 				somethingChanged = true;
 		}
-		// if (somethingChanged) writeFile();
+		if (somethingChanged) eventBus.fireEvent(new ContentChangedEvent());
 	}
 
 	@Override
@@ -52,15 +55,5 @@ public class SvgService extends HttpServlet implements DispatcherService {
 		resp.setContentType("image/svg+xml");
 		resp.setStatus(HttpServletResponse.SC_OK);
 		outputter.output(doc, resp.getOutputStream());
-	}
-
-	private void writeFile() {
-		try {
-			outputter.output(doc, new FileOutputStream(file));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

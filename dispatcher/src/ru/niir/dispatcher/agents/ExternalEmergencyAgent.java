@@ -11,6 +11,7 @@ import ru.niir.dispatcher.EventBus;
 import ru.niir.dispatcher.events.StateChangedEvent;
 import ru.niir.dispatcher.events.StateChangedEvent.EmergencyType;
 
+@SuppressWarnings("serial")
 public class ExternalEmergencyAgent extends HttpServlet {
 	private final EventBus eventBus;
 

@@ -28,10 +28,14 @@
               scroll();
           });
       });
-      
-    </script>
-    <script type="text/JavaScript">
-      window.onload=setTimeout("location.reload(true);",1000);
+
+      var _ws = new MozWebSocket("ws://localhost:8080/webSocket");
+      _ws.onmessage = function(m){
+          window.onload=setTimeout("location.reload(true);",1000);
+      };
+      _ws.onclose = function(m){
+          this._ws = null;
+      }
     </script>
   </head>
   <frameset cols="80%, 20%">

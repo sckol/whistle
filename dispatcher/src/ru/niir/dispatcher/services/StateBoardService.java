@@ -1,8 +1,6 @@
 package ru.niir.dispatcher.services;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +15,8 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 
+import ru.niir.dispatcher.EventBus;
+import ru.niir.dispatcher.events.ContentChangedEvent;
 import ru.niir.dispatcher.events.DispatcherEvent;
 import ru.niir.dispatcher.services.filters.CategoryCountFilter;
 import ru.niir.dispatcher.services.filters.EmergencyStateBoardFilter;
@@ -25,15 +25,18 @@ import ru.niir.dispatcher.services.filters.EmployeeFilter;
 import ru.niir.dispatcher.services.filters.HtmlFilter;
 import ru.niir.dispatcher.services.filters.OkStateBoardFilter;
 
+@SuppressWarnings("serial")
 public class StateBoardService extends HttpServlet implements DispatcherService {
 	private final File file;
 	private final Document doc;
 	private final XMLOutputter outputter = new XMLOutputter();
 	private final List<HtmlFilter> filters = new ArrayList<HtmlFilter>();
+	private final EventBus eventBus;
 
-	public StateBoardService(final String fileName) throws JDOMException,
+	public StateBoardService(final EventBus eventBus, final String fileName) throws JDOMException,
 			IOException {
 		super();
+		this.eventBus = eventBus;
 		this.file = new File(fileName);
 		doc = new SAXBuilder().build(file);
 		filters.add(new OkStateBoardFilter(doc));
@@ -50,7 +53,7 @@ public class StateBoardService extends HttpServlet implements DispatcherService 
 			if (filter.onEvent(_event))
 				somethingChanged = true;
 		}
-		// if (somethingChanged) writeFile();
+		if (somethingChanged) eventBus.fireEvent(new ContentChangedEvent());
 	}
 
 	@Override
@@ -59,15 +62,5 @@ public class StateBoardService extends HttpServlet implements DispatcherService 
 		resp.setContentType("text/html");
 		resp.setStatus(HttpServletResponse.SC_OK);
 		outputter.output(doc, resp.getOutputStream());
-	}
-
-	private void writeFile() {
-		try {
-			outputter.output(doc, new FileOutputStream(file));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }
