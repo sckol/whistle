@@ -5,23 +5,30 @@ import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Graphics;
 
 import ru.niir.protowhistle.io.MediaManager;
+import ru.niir.protowhistle.io.StorageManager;
 import ru.niir.protowhistle.ui.CanvasListener;
 import ru.niir.protowhistle.ui.CanvasWithListeners;
 import ru.niir.protowhistle.ui.UIController;
 import ru.niir.protowhistle.ui.Vibrator;
-import ru.niir.protowhistle.util.Console;
 
-public class Alarm extends CanvasWithListeners implements Component {
+public class Alarm implements Component {
 	public static final int STATE_AMOUNT = 3;
 	private int state = -1;
 	private final MediaManager mediaManager;
-	private final Console console = Console.getInstance();
 	private boolean onScreen = false;
 	private boolean needRepaint = true;
+	private final String rootDirectory;
+	private final StorageManager storageManager;
+	private int type = -1;
+	private final CanvasWithListeners canvas;
 
-	public Alarm(final MediaManager mediaManager) {
+	public Alarm(final MediaManager mediaManager,
+			final StorageManager storageManager, final String rootDirectory) {
 		this.mediaManager = mediaManager;
-		setFullScreenMode(true);
+		this.rootDirectory = rootDirectory;
+		this.storageManager = storageManager;
+		canvas = mediaManager.getCanvas();
+		canvas.setFullScreenMode(true);
 	}
 
 	public void show(final Display display, final UIController controller) {
@@ -29,8 +36,8 @@ public class Alarm extends CanvasWithListeners implements Component {
 			needRepaint = true;
 			Vibrator.vibrate(display);
 			onScreen = true;
-			display.setCurrent(this);
-			setKeyPressedListener(new CanvasListener() {
+			display.setCurrent(canvas);
+			canvas.setKeyPressedListener(new CanvasListener() {
 				public void proceedKeyEvent(int keyCode) {
 					switch (keyCode) {
 					case Canvas.KEY_STAR:
@@ -45,29 +52,33 @@ public class Alarm extends CanvasWithListeners implements Component {
 			});
 		}
 		if (needRepaint) {
-			repaint();
 			play();
 		}
 	}
 
-	public void updateState(int newState) {
-		if (newState < 0 || newState >= STATE_AMOUNT) {
-			console.println("Wrong state: " + newState);
-		}
+	public void updateState(final int newState, final int type) {
 		if (newState > state) {
-			state = newState;
+			this.state = newState;
+			this.type = type;
 			needRepaint = true;
 		}
 	}
 
 	protected void paint(Graphics g) {
-		if (needRepaint) {
-			mediaManager.playMedia(0, state, g, this);
-			needRepaint = false;
+		if (mediaManager.getImage() != null) {
+			g.drawImage(mediaManager.getImage(), 0, 0, Graphics.LEFT
+					| Graphics.TOP);
 		}
 	}
 
 	private void play() {
-		mediaManager.replay();
+		mediaManager.playMedia(getFileBase(type, state, storageManager.loadCategory(), 'e'));
+		canvas.repaint();
+		needRepaint = false;
+	}
+
+	private String getFileBase(final int type, final int state, char category,
+			char language) {
+		return rootDirectory + type + state + category + language;
 	}
 }

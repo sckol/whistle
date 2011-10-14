@@ -39,6 +39,9 @@ public class XBeeAgent implements Runnable {
 								response.getValue(), ND_LSB_START_BYTE),
 								getSensorName(response.getValue())));
 					}
+				} else {
+					System.out.println("HELL" +
+							"LO");
 				}
 			}
 		} catch (XBeeException e) {
@@ -60,7 +63,7 @@ public class XBeeAgent implements Runnable {
 			return 0;
 		} else {
 			System.out.println("ANALOG: " + resp.getAnalog1());
-			if (resp.getAnalog1() < 250)
+			if (resp.getAnalog1() < 240)
 				return 1;
 			else
 				return 0;

@@ -1,6 +1,8 @@
 package ru.niir.dispatcher.services;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,8 +61,9 @@ public class StateBoardService extends HttpServlet implements DispatcherService 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		resp.setContentType("text/html");
+		resp.setContentType("text/html;charset=utf-8");
 		resp.setStatus(HttpServletResponse.SC_OK);
 		outputter.output(doc, resp.getOutputStream());
+		new XMLOutputter().output(doc, new FileOutputStream(new File("D:/Users/peter/desktop/123.xml")));
 	}
 }

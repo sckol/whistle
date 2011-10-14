@@ -15,11 +15,15 @@ import org.snmp4j.transport.DefaultUdpTransportMapping;
 
 import ru.niir.dispatcher.events.DispatcherEvent;
 import ru.niir.dispatcher.events.StateChangedEvent;
+import ru.niir.dispatcher.events.StateChangedEvent.EmergencyType;
 
 public class SnmpService implements DispatcherService {
 	private final CommunityTarget target = new CommunityTarget();
 	private final PDU pdu = new PDU();
 	private final Snmp snmp;
+	private final VariableBinding binding = new VariableBinding(
+			new OID(
+					".1.3.6.1.4.1.5166.2.1.130.10.1.2.25.97.112.112.67.111.110.116.114.111.108.83.116.97.114.116.68.86.66.67.104.97.110.110.101.108"));
 
 	public SnmpService() throws IOException {
 		super();
@@ -30,23 +34,35 @@ public class SnmpService implements DispatcherService {
 		target.setTimeout(1500);
 		target.setVersion(SnmpConstants.version1);
 		pdu.setType(PDU.SET);
-		pdu.add(new VariableBinding(
-				new OID(
-						"1.3.6.1.4.1.5166.2.1.130.10.1.2.25.97.112.112.67.111.110.116.114.111.108.83.116.97.114.116.68.86.66.67.104.97.110.110.101.108"),
-				new OctetString("1")));
+		pdu.add(binding);
 		pdu.setNonRepeaters(0);
 	}
 
 	@Override
-	public void onEvent(DispatcherEvent _event) {
+	public void onEvent(final DispatcherEvent _event) {
 		if (_event instanceof StateChangedEvent) {
-			try {
-				final ResponseEvent resp = snmp.send(pdu, target);
-				System.out.println(resp);
-				System.out.println(resp.getPeerAddress());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			final StateChangedEvent event = (StateChangedEvent) _event;
+			binding.setVariable(new OctetString(emergencyTypeToChannel(event
+					.getType())));
+			new Thread(new Runnable() {
+				public void run() {
+					try {
+						snmp.send(pdu, target);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}).start();
 		}
+	}
+
+	private static final String emergencyTypeToChannel(final EmergencyType type) {
+		switch (type) {
+		case FIRE:
+			return "1";
+		case GAS_ATTACK:
+			return "2";
+		}
+		return "";
 	}
 }

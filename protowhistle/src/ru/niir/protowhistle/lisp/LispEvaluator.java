@@ -6,24 +6,39 @@ import ru.niir.protowhistle.util.Console;
 public class LispEvaluator {
 	private UIController controller;
 	private final Console console = Console.getInstance();
+	private final String COMMAND_PATTERN = "(emergency A B)";
 
-	public void eval(final String cmd) {
-		final StringBuffer buffer = new StringBuffer(cmd);
-		if (cmd.startsWith("(emergency 0 ")) {
-			buffer.delete(0, "(emergency 0 ".length());
-			buffer.deleteCharAt(buffer.length() - 1);
-			try {
-				controller.showAlarm(Integer.parseInt(buffer.toString()));
-			} catch (NumberFormatException e) {
-				console.println("Cannot read emergency state");
+	public LispEvaluator() {
+		super();
+	}
+
+	public boolean eval(final String cmd) {
+		if (cmd.length() == COMMAND_PATTERN.length()) {
+			final int argument1Index = COMMAND_PATTERN.indexOf('A');
+			final int argument2Index = COMMAND_PATTERN.indexOf('B');
+			if (cmd.startsWith(COMMAND_PATTERN.substring(0, argument1Index))) {
+				try {
+					final int type = Integer.parseInt(cmd.substring(
+							argument1Index, argument1Index + 1));
+					final int state = Integer.parseInt(cmd.substring(
+							argument2Index, argument2Index + 1));
+					controller.showAlarm(type, state);
+					return true;
+				} catch (NumberFormatException e) {
+					console.println("Cannot read emergency state");
+					return false;
+				}
+			} else {
+				console.println("Unknown command:" + cmd);
+				return false;
 			}
 		} else {
-			console.println("Unknown command");
+			console.println("Unknown command" + cmd);
+			return false;
 		}
 	}
 
 	public void setController(final UIController controller) {
 		this.controller = controller;
 	}
-	
 }

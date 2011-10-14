@@ -24,6 +24,7 @@ import ru.niir.dispatcher.services.StateMonitorService;
 import ru.niir.dispatcher.services.SvgService;
 import ru.niir.dispatcher.services.WebSocketService;
 import ru.niir.dispatcher.services.XBeeScannerService;
+import ru.niir.dispatcher.services.XbeeResetterService;
 
 import com.rapplogic.xbee.api.XBee;
 import com.rapplogic.xbee.api.XBeeConfiguration;
@@ -56,8 +57,11 @@ public class DispatcherServer {
 		context.addServlet(new ServletHolder(svgService), "/plan.svg");
 		context.addServlet(new ServletHolder(stateBoardService),
 				"/stateBoard.html");
-		context.addServlet(new ServletHolder(new ExternalEmergencyAgent(bus)),
+		final ExternalEmergencyAgent externalEmergencyAgent = new ExternalEmergencyAgent(
+				bus);
+		context.addServlet(new ServletHolder(externalEmergencyAgent),
 				"/declareGasAttack");
+		context.addServlet(new ServletHolder(externalEmergencyAgent), "/reset");
 		context.addServlet(new ServletHolder(webSocketService), "/webSocket");
 		handlerList.addHandler(context);
 		handlerList.addHandler(resourceHandler);
@@ -77,15 +81,21 @@ public class DispatcherServer {
 				Long.parseLong(conf
 						.getProperty("XbeeScannerService.scanFrequency")));
 		final Service service = Service.getInstance();
-		SerialModemGateway gateway = new SerialModemGateway("modem", "COM1",
+		SerialModemGateway gateway1 = new SerialModemGateway("modem1", "COM1",
 				9600, "Siemens", "MC35i");
-		gateway.setOutbound(true);
-		service.addGateway(gateway);
+		SerialModemGateway gateway2 = new SerialModemGateway("modem2", "COM50",
+				9600, "Siemens", "MC35i");
+		gateway1.setOutbound(true);
+		gateway2.setOutbound(true);
+		service.addGateway(gateway1);
+		service.addGateway(gateway2);
 		service.startService();
-		System.out.println("helllloooo");
 		final SmsService smsService = new SmsService(service);
-		smsService.addPhone(new Phone("+79851980192", 50042, 1, 0));
+		smsService.addPhone(new Phone("+79651629980", 50045, 1, 0));
+		smsService.addPhone(new Phone("+79264792779", 50045, 2, 0));
 		bus.addListener(smsService);
+		bus.addListener(new SnmpService());
+		bus.addListener(new XbeeResetterService(xbee));
 		bus.fireEvent(new ResetEvent());
 	}
 }

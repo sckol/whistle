@@ -52,7 +52,7 @@ public class SvgService extends HttpServlet implements DispatcherService {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		resp.setContentType("image/svg+xml");
+		resp.setContentType("image/svg+xml;charset=utf-8");
 		resp.setStatus(HttpServletResponse.SC_OK);
 		outputter.output(doc, resp.getOutputStream());
 	}

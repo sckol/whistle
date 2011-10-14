@@ -58,11 +58,32 @@ public class ConnectionManager {
 		this.rawReader = reader;
 	}
 	
+	public void switchToNormalMode() {
+		switchToMode(NORMAL_MODE);
+	}
+	
 	public void switchToMode(final char mode) {
 		try {
 			os.write(mode);
+			os.flush();
 		} catch (IOException e) {
 			console.printThrowable(e);
+		}
+	}
+	
+	public void setUserCategory(final char category, final char serial) {
+		try {
+		os.write(category);
+		os.flush();
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		os.write(serial);
+		os.flush();
+		} catch (IOException e) {
+			console.printThrowable(e, "Cannot upload user category to the terminal");
 		}
 	}
 

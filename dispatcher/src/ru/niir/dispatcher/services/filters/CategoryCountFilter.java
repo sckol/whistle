@@ -28,7 +28,7 @@ public class CategoryCountFilter extends HtmlFilter {
 			if (elementNodeType != null) {
 				final int count = countCategory(event.getScannerResults(), elementNodeType);
 				if (count > 0) return switchText(String.valueOf(count));
-				else return switchText("â€”");
+				else return switchText("—");
 			} else return false;
 		} else return false;
 	}

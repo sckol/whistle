@@ -11,43 +11,41 @@ import javax.microedition.rms.RecordStoreException;
 import ru.niir.protowhistle.io.MediaManager;
 import ru.niir.protowhistle.io.BeaconDiscoverer;
 import ru.niir.protowhistle.io.ConnectionManager;
-import ru.niir.protowhistle.io.ImageManager;
+import ru.niir.protowhistle.io.SmsProcessor;
 import ru.niir.protowhistle.io.StorageManager;
 import ru.niir.protowhistle.lisp.LispEvaluator;
 import ru.niir.protowhistle.ui.component.ConsoleComponent;
 import ru.niir.protowhistle.util.Console;
 
-public class NotifyMidlet extends MIDlet {
+public class NotifyMidlet extends MIDlet implements Exitable {
 	private Display display;
 	private UIController controller;
 	private Console console;
 	private SmsProcessor smsProcessor;
-	private LispEvaluator lispEvaluator = new LispEvaluator();
+	private LispEvaluator lispEvaluator;
 
 	protected void startApp() throws MIDletStateChangeException {
 		display = Display.getDisplay(this);
 		console = Console.getInstance();
-		final String rootDirectory = System.getProperty("fileconn.dir.photos")
-				+ "whistle/";
 		try {
 			final StorageManager storageManager = StorageManager
 					.getStorageManager();
+			lispEvaluator = new LispEvaluator();
 			controller = new UIController(display, lispEvaluator,
 					BeaconDiscoverer.createBeaconDiscoverer(),
-					new ConnectionManager(), storageManager, new ImageManager(
-							rootDirectory), new MediaManager(System
-									.getProperty("fileconn.dir.memorycard") + "Images/whistle/", storageManager));
-			smsProcessor = SmsProcessor.getSmsProcesser(controller,
-					storageManager);
+					new ConnectionManager(), storageManager,
+					new MediaManager(), this,
+					System.getProperty("fileconn.dir.memorycard") + "whistle/");
+			smsProcessor = new SmsProcessor(lispEvaluator);
 			switch (smsProcessor.getProcessState()) {
 			case SmsProcessor.PROCESSED:
 				return;
+			case SmsProcessor.ERROR:
+				controller.showConsole();
+				break;
 			case SmsProcessor.NOT_PROCESSED:
 				controller.showMainMenu();
 				break;
-			case SmsProcessor.CANCEL:
-				destroyApp(false);
-				notifyDestroyed();
 			}
 		} catch (BluetoothStateException e) {
 			showConsole(e, "Cannot initialize Bluetooth");
@@ -77,5 +75,14 @@ public class NotifyMidlet extends MIDlet {
 	protected void pauseApp() {
 		// To change body of implemented methods use File | Settings | File
 		// Templates.
+	}
+
+	public void exit() {
+		try {
+			destroyApp(false);
+		} catch (MIDletStateChangeException e) {
+			e.printStackTrace();
+		}
+		notifyDestroyed();
 	}
 }

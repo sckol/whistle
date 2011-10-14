@@ -12,31 +12,36 @@ import javax.microedition.media.MediaException;
 import javax.microedition.media.Player;
 import javax.microedition.media.control.VideoControl;
 
+import ru.niir.protowhistle.ui.CanvasWithListeners;
 import ru.niir.protowhistle.util.Console;
 
 public class MediaManager {
 	private Player currentPlayer;
 	private final Console console = Console.getInstance();
-	private final String rootDirectory;
-	private final StorageManager storageManager;
+	private Image image;
+	private Player player;
+	private final CanvasWithListeners canvas = new CanvasWithListeners() {
+		protected void paint(Graphics g) {
+			if (getImage() != null) {
+				g.drawImage(getImage(), 0, 0, Graphics.LEFT | Graphics.TOP);
+			}
+		}
+	};
 
-	public MediaManager(final String rootDirectory,
-			final StorageManager storageManager) {
-		this.rootDirectory = rootDirectory;
-		this.storageManager = storageManager;
-	}
-
-	public void playMedia(final int type, final int state, final Graphics g,
-			final Canvas c) {
-		final String fileBase = getFileBase(type, state,
-				storageManager.loadCategory(), 'r');
+	public void playMedia(final String fileBase) {
 		try {
 			final String imageFileName = fileBase + ".png";
-			if (((FileConnection) Connector.open(imageFileName, Connector.READ)).exists()) {
-				drawImage(imageFileName, g);
+			if (((FileConnection) Connector.open(imageFileName, Connector.READ))
+					.exists()) {
+				if (player != null) {
+					player.close();
+				}
+				image = Image.createImage(Connector
+						.openInputStream(imageFileName));
 				playAudio(fileBase + ".amr");
 			} else {
-				playVideo(fileBase + ".mp4", c);
+				image = null;
+				playVideo(fileBase + ".mp4", canvas);
 			}
 		} catch (IOException e) {
 			console.println("Cannot play media");
@@ -44,19 +49,14 @@ public class MediaManager {
 			console.println("Error while playing media");
 		}
 	}
-	
-	public void replay() {}
 
-	private String getFileBase(final int type, final int state, char category,
-			char language) {
-		return rootDirectory + type + state + category + language;
+	public Image getImage() {
+		return image;
 	}
 
 	private void playVideo(final String fileName, final Canvas c)
 			throws MediaException, IOException {
-		//FIX HERE!!!
-		final Player player = Manager.createPlayer(
-				Connector.openInputStream(fileName), "video/mpeg");
+		player = Manager.createPlayer(fileName);
 		player.realize();
 		player.setLoopCount(-1);
 		VideoControl videoControl = (VideoControl) player
@@ -69,10 +69,13 @@ public class MediaManager {
 		player.start();
 	}
 
+	public CanvasWithListeners getCanvas() {
+		return canvas;
+	}
+
 	private void playAudio(final String fileName) throws IOException,
 			MediaException {
-		final Player newPlayer = Manager.createPlayer(
-				Connector.openInputStream(fileName), "audio/amr");
+		final Player newPlayer = Manager.createPlayer(fileName);
 		newPlayer.prefetch();
 		if (currentPlayer != null)
 			currentPlayer.stop();
@@ -82,8 +85,9 @@ public class MediaManager {
 		currentPlayer = newPlayer;
 	}
 
-	private void drawImage(final String fileName, Graphics g) throws IOException {
-		g.drawImage(Image.createImage(Connector.openInputStream(fileName)), 0,
-				0, Graphics.LEFT | Graphics.TOP);
+	public void stop() {
+		if (player != null) {
+			player.close();
+		}
 	}
 }

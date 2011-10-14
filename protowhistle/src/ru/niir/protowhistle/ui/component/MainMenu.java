@@ -12,7 +12,7 @@ public class MainMenu extends List implements Component {
 	public MainMenu() {
 		super("Система безопасности", List.IMPLICIT, new String[] {
 				"Абонентское устройство", "Индивидуальные данные",
-				"Тест соединения", "Тест оповещения", "Консоль", "Тест видео", "Калибровка" },
+				"Тест соединения", "Тест оповещения", "Консоль", "Тест видео", "Калибровка", "Тест падения" },
 				null);
 	}
 
@@ -39,7 +39,10 @@ public class MainMenu extends List implements Component {
 					controller.showVideo();
 					break;
 				case 6:
-					controller.showCalibrationMenu();
+					controller.showCalibrator();
+					break;
+				case 7:
+					controller.fakeFall();
 					break;
 				}
 			}
