@@ -30,7 +30,7 @@
           });
       });
 
-      var _ws = new MozWebSocket("ws://localhost:8089/webSocket");
+      var _ws = new WebSocket("ws://localhost:8089/webSocket");
       _ws.onmessage = function(m){
           window.onload=setTimeout("location.reload(true);",1000);
       };

@@ -81,18 +81,18 @@ public class DispatcherServer {
 				Long.parseLong(conf
 						.getProperty("XbeeScannerService.scanFrequency")));
 		final Service service = Service.getInstance();
-		SerialModemGateway gateway1 = new SerialModemGateway("modem1", "COM1",
+		SerialModemGateway gateway1 = new SerialModemGateway("modem1", "COM58",
 				9600, "Siemens", "MC35i");
-		SerialModemGateway gateway2 = new SerialModemGateway("modem2", "COM50",
-				9600, "Siemens", "MC35i");
+//		SerialModemGateway gateway2 = new SerialModemGateway("modem2", "COM53",
+//				9600, "Siemens", "MC35i");
 		gateway1.setOutbound(true);
-		gateway2.setOutbound(true);
+	///	gateway2.setOutbound(true);
 		service.addGateway(gateway1);
-		service.addGateway(gateway2);
+///		service.addGateway(gateway2);
 		service.startService();
 		final SmsService smsService = new SmsService(service);
-		smsService.addPhone(new Phone("+79651629980", 50045, 1, 0));
-		smsService.addPhone(new Phone("+79264792779", 50045, 2, 0));
+		//smsService.addPhone(new Phone("+79651629980", 50045, 2, 1));
+		smsService.addPhone(new Phone("+79851980192", 50045, 1, 2));
 		bus.addListener(smsService);
 		bus.addListener(new SnmpService());
 		bus.addListener(new XbeeResetterService(xbee));

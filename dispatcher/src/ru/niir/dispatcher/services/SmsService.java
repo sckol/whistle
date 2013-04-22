@@ -1,13 +1,16 @@
 package ru.niir.dispatcher.services;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
 import org.smslib.AGateway;
+import org.smslib.GatewayException;
 import org.smslib.IQueueSendingNotification;
 import org.smslib.OutboundMessage;
 import org.smslib.Service;
+import org.smslib.TimeoutException;
 
 import ru.niir.dispatcher.Phone;
 import ru.niir.dispatcher.agents.SmsAgent.SmsAgentTask;
@@ -38,7 +41,7 @@ public class SmsService implements DispatcherService {
 			final boolean firstNotify = event.getOldState() == 0;
 			final PriorityQueue<SmsAgentTask> transaction = new PriorityQueue<SmsAgentTask>();
 			for (Phone phone : phones) {
-				transaction.add(new SmsAgentTask(phone.getNumber(), phone
+				transaction.add(new SmsAgentTask(phone.getNumber(), phone	
 						.getPort(), "(emergency " + typeToInt(event.getType()) + " " + (event.getNewState() - 1)
 						+ ")", firstNotify ? phone.getNotifyPriority() : phone
 						.getStateUpdatePriority()));

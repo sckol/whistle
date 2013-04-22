@@ -70,7 +70,7 @@ public class XBeeScannerService implements DispatcherService {
 			return NodeType.BLIND;
 		else if (nodeName.startsWith("INVALID"))
 			return NodeType.INVALID;
-		else if (nodeName.startsWith("SECURITY"))
+		else if (nodeName.startsWith("EMPLOYEE"))
 			return NodeType.EMPLOYEE;
 		else
 			return null;

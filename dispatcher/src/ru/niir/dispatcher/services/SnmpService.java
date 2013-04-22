@@ -29,7 +29,7 @@ public class SnmpService implements DispatcherService {
 		super();
 		snmp = new Snmp(new DefaultUdpTransportMapping());
 		target.setCommunity(new OctetString("public"));
-		target.setAddress(GenericAddress.parse("udp:192.168.1.101/161"));
+		target.setAddress(GenericAddress.parse("udp:194.54.133.171/161"));
 		target.setRetries(2);
 		target.setTimeout(1500);
 		target.setVersion(SnmpConstants.version1);
