@@ -9,14 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import ru.niir.dispatcher.EventBus;
 import ru.niir.dispatcher.events.ResetEvent;
+import ru.niir.dispatcher.events.ShopSubmittedEvent;
 import ru.niir.dispatcher.events.StateChangedEvent;
 import ru.niir.dispatcher.events.StateChangedEvent.EmergencyType;
 
 @SuppressWarnings("serial")
-public class ExternalEmergencyAgent extends HttpServlet {
+public class ServerRequestAgent extends HttpServlet {
 	private final EventBus eventBus;
 
-	public ExternalEmergencyAgent(final EventBus eventBus) {
+	public ServerRequestAgent(final EventBus eventBus) {
 		super();
 		this.eventBus = eventBus;
 	}
@@ -24,11 +25,17 @@ public class ExternalEmergencyAgent extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		if (req.getRequestURL().indexOf("GasAttack") != -1) {
+		final String cmd = req.getParameter("cmd");
+		if (cmd != null)
+		if (cmd.equals("gasAttack")) {
 			eventBus.fireEvent(new StateChangedEvent(1, 0, EmergencyType.GAS_ATTACK, "Gas atack"));
-		} else if (req.getRequestURL().indexOf("reset") != -1) {
+		} else if (cmd.equals("reset")) {
 			eventBus.fireEvent(new ResetEvent());
+		} else if (cmd.equals("submitShop")) {
+			eventBus.fireEvent(new ShopSubmittedEvent());
 		}
 		resp.setStatus(HttpServletResponse.SC_OK);
-	}
+		resp.setContentType("text/html");
+		resp.getWriter().write("Done");
+	}	
 }

@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.jetty.websocket.WebSocket;
 import org.eclipse.jetty.websocket.WebSocket.Connection;
@@ -16,6 +18,7 @@ import ru.niir.dispatcher.events.DispatcherEvent;
 @SuppressWarnings("serial")
 public class WebSocketService extends WebSocketServlet implements
 		DispatcherService {
+
 
 	private final Set<Connection> members = new CopyOnWriteArraySet<WebSocket.Connection>();
 

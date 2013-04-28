@@ -13,9 +13,10 @@ import org.smslib.Service;
 import org.smslib.modem.SerialModemGateway;
 
 import ru.niir.dispatcher.agents.ConsoleAgent;
-import ru.niir.dispatcher.agents.ExternalEmergencyAgent;
+import ru.niir.dispatcher.agents.ServerRequestAgent;
 import ru.niir.dispatcher.agents.XBeeAgent;
 import ru.niir.dispatcher.events.ResetEvent;
+import ru.niir.dispatcher.services.DvbService;
 import ru.niir.dispatcher.services.LoggerService;
 import ru.niir.dispatcher.services.SmsService;
 import ru.niir.dispatcher.services.SnmpService;
@@ -99,17 +100,18 @@ public class DispatcherServer {
 		if (conf.getProperty("Services.Snmp").equals("enable")) {
 			bus.addListener(new SnmpService());
 		}
-		
+		if (conf.getProperty("Services.Dvb").equals("enable")) {
+			bus.addListener(new DvbService(conf.getProperty("DvbService.controlFile")));
+		}
 
 		if (conf.getProperty("Agents.Console").equals("enable")) {
 			new Thread(new ConsoleAgent(bus)).start();
 		}
-		if (conf.getProperty("Agents.ExternalEmergency").equals("enable")) {
-			final ExternalEmergencyAgent externalEmergencyAgent = new ExternalEmergencyAgent(
+		if (conf.getProperty("Agents.ServerRequest").equals("enable")) {
+			final ServerRequestAgent externalEmergencyAgent = new ServerRequestAgent(
 					bus);
 			context.addServlet(new ServletHolder(externalEmergencyAgent),
-					"/declareGasAttack");
-			context.addServlet(new ServletHolder(externalEmergencyAgent), "/reset");
+					"/cmd");
 		}
 		if (conf.getProperty("Agents.Xbee").equals("enable")) {
 			if (xbee == null) xbee = getXbee(conf);
