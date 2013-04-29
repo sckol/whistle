@@ -6,17 +6,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-  </head>
-Актуальная информация об услугах регулярно передается пользователю по ТВ каналу в фоновом режиме.
-Когда пользователь решает воспользоваться услугой, нужные данные извлекаются из памяти приставки.
-Сервер хранит всю необходимую информацию о пользователе, поэтому запрос на оказание услуги умещается в одно SMS-сообщение.
-Сервер пересылает запрос провайдеру услуги, предварительно зарегистрировав его у себя для последующего админинстрирования услуги.
-Все пользовательские запросы шифруются электронной цифровой подписью и могут подтверждаться вводом пин-кода.
 
-  <div>
-    <iframe style="z-index:2;position:absolute; top:80px; left:-15px;-moz-transform: scale(0.7);" frameborder="0" scrolling="yes" width="950" height="610" align="midle" src="../../../../../Desktop/bitrix3.html" name="imgbox" id="imgbox">
-      <p>iframes are not supported by your browser.</p>
-    </iframe>
-    <object style="position:absolute; top:00px;" data="../svg/monitor.svg"  type="image/svg+xml" width="900px"/>
-  </div>
+    <!-- Le styles -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/ius.css" rel="stylesheet">
+  </head>
+  
+  <body>
+    <div class="container">
+      <h3 class="muted">Информационно-управленческая сеть</h3>
+      <div class="navbar">
+        <div class="navbar-inner">
+	  <div class="container">
+	    <ul class="nav">
+              <li><a href="ius-entry.html">Вход в ИУС</a></li>
+              <li class="active"><a href="ius-service.html">Оказание услуг</a></li>
+              <li><a href="ius-mgmt.html">Администрирование услуг</a></li>
+              <li><a href="ius-evi.html">Передача ЭВИ</a></li>
+	    </ul>
+	  </div>
+        </div>
+      </div><!-- /.navbar -->
+      
+      <div class="carousel slide">
+	<div class="carousel-inner">
+	  <div class="active item">
+	    <div class="jumbotron">
+	      <h1>Порядок предоставления услуг в ИУС</h1>
+	    </div>
+	    <ol class="service-order-list">
+	      <li>Актуальная информация об услугах регулярно передается пользователю по ТВ каналу в фоновом режиме.</li>
+	      <li>Когда пользователь решает воспользоваться услугой, нужные данные извлекаются из памяти приставки.</li>
+	      <li>Сервер хранит всю необходимую информацию о пользователе, поэтому запрос на оказание услуги умещается в одно SMS-сообщение.</li>
+	      <li>Сервер пересылает запрос провайдеру услуги, предварительно зарегистрировав его у себя для последующего админинстрирования услуги.</li>
+	      <li>Все пользовательские запросы шифруются электронной цифровой подписью и могут подтверждаться вводом пин-кода.</li>
+	    </ol>
+	    <div class="jumbotron">
+	      <a class="btn btn-large btn-success" href="#" onclick="demonstration()">Демонстрация</a>
+	    </div>
+	  </div><!--div class="active item"-->
+	  <div class="item">
+	    <iframe style="z-index:2;position:absolute; top:80px; left:-15px;-moz-transform: scale(0.7);" width="950" height="610" src="../../../../../Desktop/bitrix3.html" name="imgbox" id="imgbox">
+	    </iframe>
+	    <object style="position:absolute; top:00px;" data="../svg/monitor.svg"  type="image/svg+xml" width="900"></object>
+	  </div>
+	</div><!--div class="carousel-inner"-->
+      </div><!--div class="carousel"-->
+      <hr>
+      <footer class="muted">	       
+	<p>&copy; ФГУП НИИР, 2013</p>
+      </footer>
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+	 ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/jquery.svg.js"></script>
+    <!--script type="text/javascript" src="../js/jquery.svgfilter.js"></script-->
+    <!--script type="text/javascript" src="../js/jquery.svgdom.js"></script-->
+    <script type="text/javascript" src="../js/jquery.svganim.js"></script>
+
+    <script src="../js/ius-entry.js"></script>    
+  </body>
 </html>
