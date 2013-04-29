@@ -9,28 +9,25 @@
 
     <!-- Le styles -->
     <link href="../css/bootstrap.css" rel="stylesheet">
-    <link href="../css/ius-entry.css" rel="stylesheet">
+    <link href="../css/ius.css" rel="stylesheet">
   </head>
 
   <body>
-
     <div class="container">
-      <div class="masthead">
-        <h3 class="muted">Информационно-управленческая сеть</h3>
-        <div class="navbar">
-          <div class="navbar-inner">
-            <div class="container">
-              <ul class="nav">
-                <li class="active"><a href="#">Вход в ИУС</a></li>
-                <li><a href="ius-service.html">Оказание услуг</a></li>
-                <li><a href="#">Администрирование услуг</a></li>
-                <li><a href="#">Передача ЭВИ</a></li>
-              </ul>
-            </div>
-          </div>
-        </div><!-- /.navbar -->
-      </div>
-
+      <h3 class="muted">Информационно-управленческая сеть</h3>
+      <div class="navbar">
+        <div class="navbar-inner">
+	  <div class="container">
+	    <ul class="nav">
+              <li class="active"><a href="ius-entry.html">Вход в ИУС</a></li>
+              <li><a href="ius-service.html">Оказание услуг</a></li>
+              <li><a href="ius-mgmt.html">Администрирование услуг</a></li>
+              <li><a href="ius-evi.html">Передача ЭВИ</a></li>
+	    </ul>
+	  </div>
+        </div>
+      </div><!-- /.navbar -->
+      
       <div class="carousel slide">
 	<div class="carousel-inner">
 	  <div class="active item">
@@ -42,22 +39,22 @@
 	      <dd>Провайдерами могут быть магазины, СМИ, информационные издания</dd>
      	      <dt>Оценивается целесообразность</dt>
 	      <dd><ul>
-		  <li>Определяется группа пользоваddтелей (по месторасположению, составу домохозяйства, уровню доходов и пр.), для которой предназначается услуга</li>
+		  <li>Определяется группа пользователей (по месторасположению, составу домохозяйства, уровню доходов и пр.), для которой предназначается услуга</li>
 		  <li>Проверяется, что новая услуга не будет дублировать уже имеющиеся</li>
 		  <li>Однотипные услуги могут быть интегрированы в одну</li>
 	      </ul></dd>
 	      <dt>Проводится входной контроль качества</dt>
-	      <dd><ul>
-		  <li>Наличие информационной системы, позволяющей обеспечивать актуальность информации (например, информации о ценах и доступности товаров)</li>
-		  <li>Репутация и длительность работы до вступления в ИУС</li>
-		  <li>Наличие системы администрирования услуг</li>
-		  <li>Возможность предоставления одинакого качества услуг для всех потребителей из выбранной группы</li>
+	      <dd><ul class="custom-list">
+		  <li><i class="icon icon-ok"></i>Наличие информационной системы, позволяющей обеспечивать актуальность информации (например, информации о ценах и доступности товаров)</li>
+		  <li><i class="icon icon-ok"></i>Репутация и длительность работы до вступления в ИУС</li>
+		  <li><i class="icon icon-ok"></i>Наличие системы администрирования услуг</li>
+		  <li><i class="icon icon-ok"></i>Возможность предоставления одинакого качества услуг для всех потребителей из выбранной группы</li>
 	      </ul></dd>
 	      <dt>Подписание документов</dt>
-	      <dd><ul>
-		  <li>Соглашение о сотрудничестве</li>
-		  <li>Соглашение о качестве услуг</li>
-		  <li>Соглашение об обработке персональных данных</li>
+	      <dd><ul class="custom-list">
+		  <li><i class="icon icon-edit"></i>Соглашение о сотрудничестве</li>
+		  <li><i class="icon icon-edit"></i>Соглашение о качестве услуг</li>
+		  <li><i class="icon icon-edit"></i>Соглашение об обработке персональных данных</li>
 	      </ul></dd>
 	      <dt>Провайдер предоставляет данные в специальном формате</dt>
 	      <dd>Актуализация данных проводится по заранее согласованному расписанию</dd>
@@ -65,7 +62,7 @@
 	      <dd>Также пользователям приходит сообщение о добавлении новой услуги и информацией о провайдере.</dd>
 	    </dl>	    	  
 	    <div class="jumbotron">
-              <a class="btn btn-large btn-success sticky-right" href="#" onclick="demonstration()">Демонстрация</a>
+	      <a class="btn btn-large btn-success" href="#" onclick="demonstration()">Демонстрация</a>
 	    </div>
 	  </div><!--div class="active item"-->
 	  <div class="item">
@@ -75,10 +72,10 @@
 	</div><!--div class="carousel-inner"-->
       </div><!--div class="carousel"-->
       <hr>
-      <footer>
+      <footer class="muted">	       
 	<p>&copy; ФГУП НИИР, 2013</p>
       </footer>
-    </div> <!-- /container -->
+    </div>
 
     <!-- Le javascript
 	 ================================================== -->
@@ -90,6 +87,6 @@
     <!--script type="text/javascript" src="../js/jquery.svgdom.js"></script-->
     <script type="text/javascript" src="../js/jquery.svganim.js"></script>
 
-<script src="../js/ius-entry.js"></script>    
-</body>
+    <script src="../js/ius-entry.js"></script>    
+  </body>
 </html>
