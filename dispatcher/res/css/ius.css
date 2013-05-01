@@ -104,3 +104,6 @@ ul.custom-list li i {
     top: 0;
     font: bold 50px/1 Sans-Serif;
 }
+.dashed {
+    border-bottom:1px dashed;
+}

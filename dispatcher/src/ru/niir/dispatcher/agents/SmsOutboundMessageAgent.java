@@ -9,11 +9,11 @@ import org.smslib.Service;
 import org.smslib.TimeoutException;
 
 
-public class SmsAgent implements Runnable {
+public class SmsOutboundMessageAgent implements Runnable {
 	private final BlockingQueue<SmsAgentTask> queue;
 	private final Service smsService;
 
-	public SmsAgent(final Service smsService, final BlockingQueue<SmsAgentTask> queue) {
+	public SmsOutboundMessageAgent(final Service smsService, final BlockingQueue<SmsAgentTask> queue) {
 		super();
 		this.queue = queue;
 		this.smsService = smsService;

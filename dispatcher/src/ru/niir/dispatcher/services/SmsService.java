@@ -1,19 +1,16 @@
 package ru.niir.dispatcher.services;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
 import org.smslib.AGateway;
-import org.smslib.GatewayException;
 import org.smslib.IQueueSendingNotification;
 import org.smslib.OutboundMessage;
 import org.smslib.Service;
-import org.smslib.TimeoutException;
 
 import ru.niir.dispatcher.Phone;
-import ru.niir.dispatcher.agents.SmsAgent.SmsAgentTask;
+import ru.niir.dispatcher.agents.SmsOutboundMessageAgent.SmsAgentTask;
 import ru.niir.dispatcher.events.DispatcherEvent;
 import ru.niir.dispatcher.events.StateChangedEvent;
 import ru.niir.dispatcher.events.StateChangedEvent.EmergencyType;

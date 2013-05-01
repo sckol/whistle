@@ -105,16 +105,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="183.79641"
-     inkscape:cy="523.06261"
+     inkscape:zoom="1"
+     inkscape:cx="447.73949"
+     inkscape:cy="475.54246"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="main-layer"
      showgrid="false"
-     inkscape:window-width="1251"
-     inkscape:window-height="797"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-width="1215"
+     inkscape:window-height="1000"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -131,7 +131,7 @@
   <g
      inkscape:label="Main"
      inkscape:groupmode="layer"
-     id="layer1"
+     id="main-layer"
      transform="translate(0,-308.2677)"
      style="display:inline">
     <path
@@ -1106,22 +1106,24 @@
     <path
        sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
-       id="path5958"
+       id="evi-server-line"
        d="m 429.25462,758.59809 c -2.17155,0 -110.26554,-95.95263 -110.26554,-95.95263"
-       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:label="#path5958" />
     <path
        sodipodi:nodetypes="cc"
        inkscape:label="#path5890"
        style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="M 324.66277,761.99194 277.18843,663.72261"
-       id="path5960"
+       id="gov-server-line"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
        d="m 120.18903,760.29098 c 2.17155,0 100.36605,-97.36684 100.36605,-97.36684"
-       id="path5962"
+       id="bank-server-line"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:label="#path5962" />
     <path
        inkscape:connector-curvature="0"
        id="shop-server-line"
@@ -1132,9 +1134,9 @@
   </g>
   <g
      inkscape:groupmode="layer"
-     id="layer3"
+     id="entry-layer"
      inkscape:label="Entry"
-     style="display:inline">
+     style="display:none">
     <text
        xml:space="preserve"
        style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:PT Sans;-inkscape-font-specification:PT Sans"
@@ -1206,7 +1208,7 @@
              style="fill:#000000;fill-rule:evenodd" />
           <polygon
              id="polygon20"
-             points="50,67 54.8,67 57.2,64.601 52.4,59.801 50,62.2 "
+             points="57.2,64.601 52.4,59.801 50,62.2 50,67 54.8,67 "
              clip-rule="evenodd"
              style="fill:#000000;fill-rule:evenodd" />
           <rect
@@ -1280,7 +1282,7 @@
        inkscape:label="#rect3005" />
     <path
        inkscape:label="#path5-6"
-       style="opacity:1;fill:#000000;display:inline"
+       style="fill:#000000;display:inline"
        id="shop-card-in-tv-icon"
        d="m 761.23672,249.13564 c 2.8195,0 4.13527,1.6917 4.13527,3.75933 v 17.57443 c 0,1.97366 -1.50374,3.57137 -3.47692,3.75934 l -37.96883,4.22925 c -3.10145,0.37593 -3.47739,4.41722 0.18797,4.41722 h 35.99518 c 4.13526,0 4.13526,6.10893 0,6.10893 h -36.74705 c -8.27054,0 -11.37199,-9.11593 -4.88714,-13.90955 l 3.28942,-2.44356 -11.65394,-25.46905 h -5.73299 c -4.41723,0 -4.41723,-6.76681 0,-6.76681 h 6.67282 c 3.3834,0 4.32323,1.59773 5.35706,4.04129 l 2.34958,4.69918 h 42.47957 z m -40.50639,50.18667 c 0,3.19544 -2.53754,5.8265 -5.92095,5.8265 -3.19544,0 -5.82698,-2.63153 -5.82698,-5.8265 0,-3.28942 2.63154,-5.92095 5.82698,-5.92095 3.38341,0 5.92095,2.63153 5.92095,5.92095 z m 3.38341,-38.53273 h 9.49232 l -2.06764,-6.39087 h -10.33817 l 2.91349,6.39087 z m 12.78127,10.99606 -2.44357,-7.61265 h -8.92843 l 3.85332,8.36405 7.51868,-0.7514 z m -1.97366,-17.38693 1.97366,6.39087 h 9.30389 l -1.50326,-6.39087 h -9.77429 z m 13.72159,16.16515 -1.87967,-6.39087 h -8.92843 l 2.34959,7.23625 8.45851,-0.84538 z m 11.55996,-16.16515 h -12.12386 l 1.40975,6.39087 h 10.71411 v -6.39087 z m 0.28195,44.9236 c 0,3.19544 -2.53755,5.8265 -5.82697,5.8265 -3.28942,0 -5.92095,-2.63153 -5.92095,-5.8265 0,-3.28942 2.63153,-5.92095 5.92095,-5.92095 3.28942,0 5.82697,2.63153 5.82697,5.92095 z m -0.28195,-35.14932 h -9.96224 l 1.50373,5.92095 8.45851,-0.84586 v -5.07509 z"
        inkscape:connector-curvature="0" />
