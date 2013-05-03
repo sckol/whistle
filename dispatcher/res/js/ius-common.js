@@ -38,13 +38,21 @@ $(document).ready(function(){
     $$.hideEach = function(key, value) {
 	value.hide();
     }
+    $$.showEach = function(key, value) {
+	value.show();
+    }
     $$.marqueeAdd = function(pathObject, direction) {
 	pathObject.css("stroke-dasharray", "7, 7");
 	marqueeList[pathObject.selector]={pathObject:pathObject, direction:direction};
     }
     $$.marqueeDelete = function(pathObject) {
 	pathObject.css("stroke-dasharray", "none");
-	delete[pathObject.selector];
+	delete marqueeList[pathObject.selector];
+    }
+    $$.marqueeDeleteAll = function() {
+	for(var i in marqueeList) {
+	    $$.marqueeDelete(marqueeList[i].pathObject);
+	}
     }
     $$.marqueeUpdtate = function() {
 	$.each(marqueeList, function(key, value) {
@@ -54,7 +62,7 @@ $(document).ready(function(){
     }
     $$.animateTracing = function(frameArray) {
 	var currentFrame = frameArray.length;
-	window.setInterval(function() {
+	return window.setInterval(function() {
 	    if(currentFrame == frameArray.length) {
 		currentFrame = 0;
 		$(frameArray).each($$.hideEach);
@@ -81,8 +89,10 @@ $(document).ready(function(){
     $$.eviServerLine = $$.$("#evi-server-line");
     $$.serverEncapsLine = $$.$("#server-encaps-line");
     $$.towerTvLine = $$.$("#tower-tv-line");
-
+    $$.backChannelLine = $$.$("#back-channel-line");
+    
     $$.towerWavesArray=[$$.$("#wave0"), $$.$("#wave1"), $$.$("#wave2"), $$.$("#wave3")];
+    $$.remoteWavesArray=[$$.$("#remote-wave0"), $$.$("#remote-wave1")];
     $$.shopCardInTvIcon=$$.$("#shop-card-in-tv-icon");
     window.setInterval($$.marqueeUpdtate, 100);
     slideActions();

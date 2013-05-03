@@ -11,94 +11,92 @@
     <link href="../css/bootstrap.css" rel="stylesheet">
     <link href="../css/ius.css" rel="stylesheet">
   </head>
-  
+
   <body>
-    <div class="container">
+    <div class="container" style="overflow:hidden;">
       <h3 class="muted">Информационно-управленческая сеть</h3>
       <div class="navbar">
         <div class="navbar-inner">
-	  <div class="container">
-	    <ul class="nav">
+          <div class="container">
+            <ul class="nav">
               <li><a href="ius-entry.html">Вход в ИУС</a></li>
               <li class="active"><a href="ius-service.html">Оказание услуг</a></li>
               <li><a href="ius-mgmt.html">Администрирование услуг</a></li>
               <li><a href="ius-evi.html">Передача ЭВИ</a></li>
-	    </ul>
-	  </div>
+            </ul>
+          </div>
         </div>
       </div><!-- /.navbar -->
-      
+
+      <div class="jumbotron">
+        <h1>Порядок предоставления услуг в ИУС</h1>
+      </div>
+      <div class="accodrion" id="service-order">
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#service-order" href="#collapseOne">
+              <span class="dashed">Обновление информации об услугах</span>
+            </a>
+          </div>
+          <div id="collapseOne" class="accordion-body collapse in">
+            <ul class="accordion-inner">
+              <li>Данные от поставщиков услуг передаются по расписанию и принимаются приставкой в фоновом режиме.</li>
+              <li>Для срочных данных предусмотрен оперативный режим доставки.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a id="service-order-link" class="accordion-toggle" data-toggle="collapse" data-parent="#service-order" href="#collapseTwo">
+              <span class="dashed">Заказ услуги</span>
+            </a>
+          </div>
+          <div id="collapseTwo" class="accordion-body collapse">
+            <ul class="accordion-inner">
+              <li>Когда пользователь решает воспользоваться услугой, нужные данные извлекаются из памяти приставки.</li>
+              <li>Сервер хранит всю необходимую информацию о пользователе, поэтому запрос на оказание услуги умещается в одно SMS-сообщение.</li>
+              <li>Все пользовательские запросы шифруются электронной цифровой подписью и могут подтверждаться вводом пин-кода.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a id="registration-link" class="accordion-toggle" href="#">
+              <span class="dashed">Регистрация заказа</span>
+            </a>
+          </div>
+        </div>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" href="#">
+              <span class="underlined external">Передача заказа поставщику и администрирование услуги</span>
+            </a>
+          </div>
+        </div>
+      </div>
       <div class="carousel slide">
-	<div class="carousel-inner">
-	  <div class="active item">
-	    <div class="jumbotron">
-	      <h1>Порядок предоставления услуг в ИУС</h1>
-	    </div>
-	    <div class="accodrion" id="service-order">
-	      <div class="accordion-group">
-		<div class="accordion-heading">
-		  <a class="accordion-toggle" data-toggle="collapse" data-parent="#service-order" href="#collapseOne">
-		    <span class="dashed">Обновление информации об услугах</span>
-		  </a>
-		</div>
-		<div id="collapseOne" class="accordion-body collapse in">
-		  <ul class="accordion-inner">
-		    <li>Данные от поставщиков услуг передаются по расписанию и принимаются приставкой в фоновом режиме.</li>
-		    <li>Для срочных данных предусмотрен оперативный режим доставки.</li>
-		  </ul>		    
-		</div>
-	      </div>
-	      <div class="accordion-group">
-		<div class="accordion-heading">
-		  <a class="accordion-toggle" data-toggle="collapse" data-parent="#service-order" href="#collapseTwo">
-		    <span class="dashed">Заказ услуги</span>
-		  </a>
-		</div>
-		<div id="collapseTwo" class="accordion-body collapse">
-		  <ul class="accordion-inner">
-		    <li>Когда пользователь решает воспользоваться услугой, нужные данные извлекаются из памяти приставки.</li>
-		    <li>Сервер хранит всю необходимую информацию о пользователе, поэтому запрос на оказание услуги умещается в одно SMS-сообщение.</li>
-		    <li>Все пользовательские запросы шифруются электронной цифровой подписью и могут подтверждаться вводом пин-кода.</li>
-		  </ul>
-		</div>
-	      </div>
-	      <div class="accordion-group">
-		<div class="accordion-heading">
-		  <a class="accordion-toggle" href="#">
-		    <span class="dashed">Регистрация заказа</span>
-		    </a>
-		</div>
-	      </div>
-	      <div class="accordion-group">
-		<div class="accordion-heading">
-		  <a class="accordion-toggle" href="#">
-		    Передача заказа поставщику и администрирование услуги
-		  </a>
-		</div>
-	      </div>
-	    </div>
-	    <object data="http://localhost:8089/svg/ius.svg" id="svg" type="image/svg+xml" width="900">
-	    </object>
-	    <div class="jumbotron">
-	      <a class="btn btn-large btn-success" href="#" onclick="demonstration()">Демонстрация</a>
-	    </div>
-	  </div><!--div class="active item"-->
-	  <div class="item">
-	    <iframe style="z-index:2;position:absolute; top:80px; left:-15px;-moz-transform: scale(0.7);" width="950" height="610" src="bitrix3.html" name="imgbox" id="imgbox">
-	    </iframe>
-	    <object style="position:absolute; top:00px;" data="../svg/monitor.svg"  type="image/svg+xml" width="900">
-	    </object>
-	  </div>
-	</div><!--div class="carousel-inner"-->
+        <div class="carousel-inner">
+          <div class="active item">
+            <object data="http://localhost:8089/svg/ius.svg" id="svg" type="image/svg+xml" width="900">
+            </object>            
+          </div><!--div class="active item"-->
+          <div class="item">
+	    <div id="monitor-object">
+            <object data="../svg/monitor.svg"  type="image/svg+xml" width="900">
+            </object>
+	    <iframe width="1100" height="610" src="bitrix3.html" name="imgbox" id="imgbox">
+            </iframe>
+          </div>
+        </div><!--div class="carousel-inner"-->
       </div><!--div class="carousel"-->
       <hr>
-      <footer class="muted">	       
-	<p>&copy; ФГУП НИИР, 2013</p>
+      <footer class="muted">
+        <p>&copy; ФГУП НИИР, 2013</p>
       </footer>
     </div> <!-- /container -->
 
     <!-- Le javascript
-	 ================================================== -->
+         ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="../js/jquery.js"></script>
     <script src="../js/bootstrap.js"></script>
@@ -108,6 +106,6 @@
     <script type="text/javascript" src="../js/jquery.svganim.js"></script>
 
     <script src="../js/ius-common.js"></script>
-    <script src="../js/ius-service.js"></script>    
+    <script src="../js/ius-service.js"></script>
   </body>
 </html>
