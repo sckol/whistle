@@ -36,7 +36,6 @@ function slideActions() {
 		    {svgOpacity: 1}, 2000);
 	    }, 3000);
 	});
-
     $('.carousel').carousel({
 	interval: false
     });

@@ -1,4 +1,5 @@
 function slideActions() {
+    var bitrixRoot = $("#bitrix");
     var serviceLines = [$$.bankServerLine, $$.shopServerLine, $$.govServerLine, $$.eviServerLine];
     var currentActiveLine = 0;
     var wavesAnimation = $$.animateTracing($$.towerWavesArray);
@@ -25,5 +26,14 @@ function slideActions() {
     });
     $('#registration-link').on('click', function(event){
 	carousel.carousel(1);
+    });
+    	carousel.carousel(1);
+    bitrixRoot.load(function() {
+	    $$.reconnect();
+    $$.ws.onmessage = function(m) {
+	if (m.data === "Shop submitted event") {
+	    $('#neworder-tr', bitrixRoot.contents()).show();
+	}
+    }
     });
 }

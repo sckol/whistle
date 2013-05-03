@@ -116,13 +116,13 @@ ul.custom-list li i {
 }
 #monitor-object {
     margin: 20px auto 0 auto;
-    width:900px;
+    width:800px;
     position:relative;
 }
 #monitor-object iframe {
     style=z-index:2;
     position:relative;
-    top:-810px;
-    left:-100px;
+    top:-654px;
+    left:-96px;
     transform: scale(0.7);
 }

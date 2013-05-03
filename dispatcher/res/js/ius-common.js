@@ -1,7 +1,7 @@
 $$ = {};
 
 $(document).ready(function(){
-    var svgRoot = document.getElementById("svg").contentDocument.documentElement;
+    var svgRoot = document.getElementById("svg").documentElement;
     $.fn.fill = function(color) {
 	return this.each(function() {
 	    return $(this).css("fill", color);
@@ -71,7 +71,16 @@ $(document).ready(function(){
 	    }
 	}, 500);
     }
-
+    $$.reconnect = function() {
+	$$.ws = new WebSocket("ws://localhost:8089/webSocket");
+	if ($$.ws.readyState != 3) {
+	    $$.ws.onclose = function() {
+		setTimeout(reconnect, 3000);
+	    }
+	} else {
+	    setTimeout(reconnect, 3000);
+	}
+    }
     var marqueeList={};
     var marquee=0;
     $$.mainLayer = $$.$("#main-layer");

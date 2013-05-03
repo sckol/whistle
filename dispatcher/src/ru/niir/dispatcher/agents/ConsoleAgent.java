@@ -8,6 +8,7 @@ import ru.niir.dispatcher.NodeType;
 import ru.niir.dispatcher.events.ResetEvent;
 import ru.niir.dispatcher.events.ScannerResultsEvent;
 import ru.niir.dispatcher.events.SensorChangedEvent;
+import ru.niir.dispatcher.events.ShopSubmittedEvent;
 
 public class ConsoleAgent implements Runnable {
 	private final EventBus eventBus;
@@ -38,6 +39,13 @@ public class ConsoleAgent implements Runnable {
 				try {
 					eventBus.fireEvent(new SensorChangedEvent(s[1], Integer
 							.parseInt(s[2])));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			} else if (s[0].equals("submit-shop")) {
+				try {
+					eventBus.fireEvent(new ShopSubmittedEvent());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

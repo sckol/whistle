@@ -14,6 +14,7 @@ import org.eclipse.jetty.websocket.WebSocketServlet;
 
 import ru.niir.dispatcher.events.ContentChangedEvent;
 import ru.niir.dispatcher.events.DispatcherEvent;
+import ru.niir.dispatcher.events.ShopSubmittedEvent;
 
 @SuppressWarnings("serial")
 public class WebSocketService extends WebSocketServlet implements
@@ -30,7 +31,7 @@ public class WebSocketService extends WebSocketServlet implements
 
 	@Override
 	public void onEvent(final DispatcherEvent _event) {
-		if (_event instanceof ContentChangedEvent) {
+		if (_event instanceof ContentChangedEvent || _event instanceof ShopSubmittedEvent) {
 			for (Connection connection : members) {
 				try {
 					connection.sendMessage(_event.toString());
