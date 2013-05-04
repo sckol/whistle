@@ -29,11 +29,15 @@ function slideActions() {
     });
     	carousel.carousel(1);
     bitrixRoot.load(function() {
-	    $$.reconnect();
-    $$.ws.onmessage = function(m) {
-	if (m.data === "Shop submitted event") {
-	    $('#neworder-tr', bitrixRoot.contents()).show();
+	$$.reconnect();
+	$$.wsMessageListener = function(m) {
+	    var msg = JSON.parse(m.data);
+	    if (msg.type === "ShopOrderEvent") {
+		$('#neworder-tr', bitrixRoot.contents()).show();
+		$('#order-name', bitrixRoot.contents()).text(msg.position);
+		$('#order-price', bitrixRoot.contents()).text(msg.price);
+		$('#order-id', bitrixRoot.contents()).text(msg.positionId);
+	    }
 	}
-    }
     });
 }

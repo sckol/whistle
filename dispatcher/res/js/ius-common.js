@@ -1,7 +1,7 @@
 $$ = {};
 
 $(document).ready(function(){
-    var svgRoot = document.getElementById("svg").documentElement;
+    var svgRoot = document.getElementById("svg").contentDocument.documentElement
     $.fn.fill = function(color) {
 	return this.each(function() {
 	    return $(this).css("fill", color);
@@ -71,15 +71,20 @@ $(document).ready(function(){
 	    }
 	}, 500);
     }
+    $$.wsMessageListener = function(){};
     $$.reconnect = function() {
-	$$.ws = new WebSocket("ws://localhost:8089/webSocket");
-	if ($$.ws.readyState != 3) {
-	    $$.ws.onclose = function() {
-		setTimeout(reconnect, 3000);
-	    }
-	} else {
-	    setTimeout(reconnect, 3000);
+    	$$.ws = new WebSocket("ws://localhost:8089/webSocket");
+    	$$.ws.onclose = function() {
+    	    setTimeout($$.reconnect, 3000);
+    	}
+	$$.ws.onmessage = function(m) {
+	    $$.wsMessageListener(m);
 	}
+	setTimeout(function() {
+	    if ($$.ws.readyState != WebSocket.OPEN) {
+		$$.reconnect();
+	    }
+	}, 3000);
     }
     var marqueeList={};
     var marquee=0;
@@ -90,8 +95,6 @@ $(document).ready(function(){
     $$.signBtn = $$.$("#sign-btn");
     $$.shopTrigger = $$.$("#shop-trigger");
     $$.shopCardTextIcon = $$.$("#shop-card-texticon");
-    $$.shopCardText = $$.$("#shop-card-text");
-    
     $$.shopServerLine = $$.$("#shop-server-line");
     $$.govServerLine = $$.$("#gov-server-line");
     $$.bankServerLine = $$.$("#bank-server-line");
@@ -99,6 +102,7 @@ $(document).ready(function(){
     $$.serverEncapsLine = $$.$("#server-encaps-line");
     $$.towerTvLine = $$.$("#tower-tv-line");
     $$.backChannelLine = $$.$("#back-channel-line");
+    $$.encapsTowerLine = $$.$("#encaps-tower-line");
     
     $$.towerWavesArray=[$$.$("#wave0"), $$.$("#wave1"), $$.$("#wave2"), $$.$("#wave3")];
     $$.remoteWavesArray=[$$.$("#remote-wave0"), $$.$("#remote-wave1")];

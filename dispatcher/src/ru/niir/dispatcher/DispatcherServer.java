@@ -1,6 +1,7 @@
 package ru.niir.dispatcher;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Properties;
 import java.util.Timer;
 
@@ -9,11 +10,14 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.smslib.SMSLibException;
 import org.smslib.Service;
+import org.smslib.TimeoutException;
 import org.smslib.modem.SerialModemGateway;
 
 import ru.niir.dispatcher.agents.ConsoleAgent;
 import ru.niir.dispatcher.agents.ServerRequestAgent;
+import ru.niir.dispatcher.agents.SmsInboundMessageAgent;
 import ru.niir.dispatcher.agents.XBeeAgent;
 import ru.niir.dispatcher.events.ResetEvent;
 import ru.niir.dispatcher.services.DvbService;
@@ -45,13 +49,13 @@ public class DispatcherServer {
 		final ServletContextHandler context = new ServletContextHandler(
 				ServletContextHandler.SESSIONS);
 		XBee xbee = null;
+		Service smslibService = null;
 		context.setContextPath("/");
-		
 		if (conf.getProperty("Services.Logger").equals("enable")) {
-			bus.addListener(new LoggerService());	
+			bus.addListener(new LoggerService());
 		}
 		if (conf.getProperty("Services.StateMonitor").equals("enable")) {
-			bus.addListener(new StateMonitorService(bus));	
+			bus.addListener(new StateMonitorService(bus));
 		}
 		if (conf.getProperty("Services.Svg").equals("enable")) {
 			final SvgService svgService = new SvgService(bus,
@@ -60,8 +64,8 @@ public class DispatcherServer {
 			context.addServlet(new ServletHolder(svgService), "/plan.svg");
 		}
 		if (conf.getProperty("Services.StateBoard").equals("enable")) {
-			final StateBoardService stateBoardService = new StateBoardService(bus,
-					conf.getProperty("StateBoard.fileName"));
+			final StateBoardService stateBoardService = new StateBoardService(
+					bus, conf.getProperty("StateBoard.fileName"));
 			bus.addListener(stateBoardService);
 			context.addServlet(new ServletHolder(stateBoardService),
 					"/stateBoard.html");
@@ -69,31 +73,31 @@ public class DispatcherServer {
 		if (conf.getProperty("Services.WebSocket").equals("enable")) {
 			final WebSocketService webSocketService = new WebSocketService();
 			bus.addListener(webSocketService);
-			context.addServlet(new ServletHolder(webSocketService), "/webSocket");
+			context.addServlet(new ServletHolder(webSocketService),
+					"/webSocket");
 		}
 		if (conf.getProperty("Services.XbeeScanner").equals("enable")) {
-			if (xbee == null) xbee = getXbee(conf);
+			if (xbee == null)
+				xbee = getXbee(conf);
 			final XBeeScannerService xbeeScannerService = new XBeeScannerService(
 					bus, xbee, Integer.parseInt(conf
 							.getProperty("XbeeScannerService.timeout")));
 			bus.addListener(xbeeScannerService);
 			final Timer scannerTimer = new Timer();
-			scannerTimer.schedule(xbeeScannerService.getTimerTask(), 0,
-					Long.parseLong(conf
+			scannerTimer.schedule(xbeeScannerService.getTimerTask(), 0, Long
+					.parseLong(conf
 							.getProperty("XbeeScannerService.scanFrequency")));
 		}
 		if (conf.getProperty("Services.XbeeResetter").equals("enable")) {
-			if (xbee == null) xbee = getXbee(conf);
+			if (xbee == null)
+				xbee = getXbee(conf);
 			bus.addListener(new XbeeResetterService(xbee));
 		}
 		if (conf.getProperty("Services.Sms").equals("enable")) {
-			final Service service = Service.getInstance();
-			SerialModemGateway gateway1 = new SerialModemGateway("modem1", "COM58",
-					9600, "Siemens", "MC35i");
-			gateway1.setOutbound(true);
-			service.addGateway(gateway1);
-			service.startService();
-			final SmsService smsService = new SmsService(service);
+			if (smslibService == null) {
+				smslibService = getSmsService(conf);
+			}
+			final SmsService smsService = new SmsService(smslibService);
 			smsService.addPhone(new Phone("+79851980192", 50045, 1, 2));
 			bus.addListener(smsService);
 		}
@@ -101,9 +105,9 @@ public class DispatcherServer {
 			bus.addListener(new SnmpService());
 		}
 		if (conf.getProperty("Services.Dvb").equals("enable")) {
-			bus.addListener(new DvbService(conf.getProperty("DvbService.controlFile")));
+			bus.addListener(new DvbService(conf
+					.getProperty("DvbService.controlFile")));
 		}
-
 		if (conf.getProperty("Agents.Console").equals("enable")) {
 			new Thread(new ConsoleAgent(bus)).start();
 		}
@@ -114,22 +118,42 @@ public class DispatcherServer {
 					"/cmd");
 		}
 		if (conf.getProperty("Agents.Xbee").equals("enable")) {
-			if (xbee == null) xbee = getXbee(conf);
+			if (xbee == null)
+				xbee = getXbee(conf);
 			new Thread(new XBeeAgent(bus, xbee)).start();
 		}
-		
+		if (conf.getProperty("Agents.SmsInboundMessage").equals("enable")) {
+			if (smslibService == null)
+				smslibService = getSmsService(conf);
+			smslibService
+					.setInboundMessageNotification(new SmsInboundMessageAgent(
+							conf.getProperty("SmsInboundMessageAgent.menuFile")));
+		}
 		handlerList.addHandler(context);
 		handlerList.addHandler(resourceHandler);
 		server.setHandler(handlerList);
 		server.start();
-		
 		bus.fireEvent(new ResetEvent());
 	}
-	
-	private static final XBee getXbee(final Properties conf) throws NumberFormatException, XBeeException {
-		final XBee xbee = new XBee(new XBeeConfiguration().withStartupChecks(false));
+
+	private static final XBee getXbee(final Properties conf)
+			throws NumberFormatException, XBeeException {
+		final XBee xbee = new XBee(
+				new XBeeConfiguration().withStartupChecks(false));
 		xbee.open(conf.getProperty("XBee.comPort"),
 				Integer.parseInt(conf.getProperty("XBee.baudRate")));
 		return xbee;
+	}
+
+	private static final Service getSmsService(final Properties conf)
+			throws TimeoutException, SMSLibException, IOException,
+			InterruptedException {
+		final Service service = Service.getInstance();
+		SerialModemGateway gateway1 = new SerialModemGateway("modem1",
+				conf.getProperty("Sms.comPort"), 9600, "Siemens", "MC35i");
+		gateway1.setOutbound(true);
+		service.addGateway(gateway1);
+		service.startService();
+		return service;
 	}
 }

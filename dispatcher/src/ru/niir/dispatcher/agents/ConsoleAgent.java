@@ -8,7 +8,7 @@ import ru.niir.dispatcher.NodeType;
 import ru.niir.dispatcher.events.ResetEvent;
 import ru.niir.dispatcher.events.ScannerResultsEvent;
 import ru.niir.dispatcher.events.SensorChangedEvent;
-import ru.niir.dispatcher.events.ShopSubmittedEvent;
+import ru.niir.dispatcher.events.ShopOrderEvent;
 
 public class ConsoleAgent implements Runnable {
 	private final EventBus eventBus;
@@ -20,6 +20,7 @@ public class ConsoleAgent implements Runnable {
 
 	@Override
 	public void run() {
+		@SuppressWarnings("resource")
 		final Scanner scanner = new Scanner(System.in);
 		while (true) {
 			final String[] s = scanner.nextLine().split(" ");
@@ -42,10 +43,10 @@ public class ConsoleAgent implements Runnable {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-
-			} else if (s[0].equals("submit-shop")) {
+			} else if (s[0].equals("shop-order")) {
 				try {
-					eventBus.fireEvent(new ShopSubmittedEvent());
+					eventBus.fireEvent(new ShopOrderEvent(s[1], Integer
+							.parseInt(s[2]), Double.parseDouble(s[3])));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -61,16 +61,16 @@
         </div>
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a id="registration-link" class="accordion-toggle" href="#">
+            <a id="registration-link" class="accordion-toggle"data-toggle="collapse" data-parent="#service-order" href="#collapseThree">
               <span class="dashed">Регистрация заказа</span>
             </a>
           </div>
-        </div>
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle" href="#">
-              <span class="underlined external">Передача заказа поставщику и администрирование услуги</span>
-            </a>
+	  <div id="collapseThree" class="accordion-body collapse">
+            <ul class="accordion-inner">
+              <li>Когда пользователь решает воспользоваться услугой, нужные данные извлекаются из памяти приставки.</li>
+              <li>Сервер хранит всю необходимую информацию о пользователе, поэтому запрос на оказание услуги умещается в одно SMS-сообщение.</li>
+              <li>Все пользовательские запросы шифруются электронной цифровой подписью и могут подтверждаться вводом пин-кода.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -82,9 +82,9 @@
           </div><!--div class="active item"-->
           <div class="item">
 	    <div id="monitor-object">
-              <object data="../svg/monitor.svg"  type="image/svg+xml" width="700">
+              <object data="../svg/monitor.svg"  type="image/svg+xml">
             </object>
-	    <iframe id="bitrix" width="888" height="577" src="bitrix/index.html" name="imgbox" id="imgbox">
+	    <iframe id="bitrix" src="bitrix/index.html" name="imgbox" id="imgbox">
             </iframe>
           </div>
         </div><!--div class="carousel-inner"-->
