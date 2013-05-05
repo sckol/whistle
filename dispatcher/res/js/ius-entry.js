@@ -1,4 +1,4 @@
-function slideActions() {
+$(document).ready(function() {
     var signBtnPressed = false;
     $$.entryLayer.show();
     $$.signBtn.hide();
@@ -41,5 +41,4 @@ function slideActions() {
     $("#demontration-btn").on("click", function demonstration() {
 	$('.carousel').carousel(1);
     });
-}
-
+});

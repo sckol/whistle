@@ -130,8 +130,8 @@ ul.custom-list li i {
 }
 #svg {
     display:block;
-    width: 1000px;
-    margin:20px auto 0 auto;
+    width: 900px;
+    margin:0 auto 0 auto;
 }
 ul.accordion-inner {
     list-style:none;

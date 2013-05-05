@@ -28,13 +28,13 @@
         </div>
       </div><!-- /.navbar -->
 
-      <div class="jumbotron">
+      <!--div class="jumbotron">
         <h1>Порядок предоставления услуг в ИУС</h1>
-      </div>
+      </div-->
       <div class="accodrion" id="service-order">
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#service-order" href="#collapseOne">
+            <a id="update-service-link" class="accordion-toggle" data-toggle="collapse" data-parent="#service-order" href="#collapseOne">
               <span class="dashed">Обновление информации об услугах</span>
             </a>
           </div>
@@ -67,9 +67,7 @@
           </div>
 	  <div id="collapseThree" class="accordion-body collapse">
             <ul class="accordion-inner">
-              <li>Когда пользователь решает воспользоваться услугой, нужные данные извлекаются из памяти приставки.</li>
-              <li>Сервер хранит всю необходимую информацию о пользователе, поэтому запрос на оказание услуги умещается в одно SMS-сообщение.</li>
-              <li>Все пользовательские запросы шифруются электронной цифровой подписью и могут подтверждаться вводом пин-кода.</li>
+              <li>Все запросы на оказание услуг до передачи их поставщику регистрируются у оператора ИУС для их последующего <a href="ius-mgmt.html">администрирования</a>.</li>
             </ul>
           </div>
         </div>
@@ -106,6 +104,7 @@
     <script type="text/javascript" src="../js/jquery.svganim.js"></script>
 
     <script src="../js/ius-common.js"></script>
+    <script src="../js/ius-svg.js"></script>
     <script src="../js/ius-service.js"></script>
   </body>
 </html>

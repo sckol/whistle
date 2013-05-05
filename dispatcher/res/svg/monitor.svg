@@ -42,9 +42,9 @@
    inkscape:window-height="1000"
    id="namedview11"
    showgrid="false"
-   inkscape:zoom="2.8284271"
-   inkscape:cx="64.26236"
-   inkscape:cy="5.3371948"
+   inkscape:zoom="16"
+   inkscape:cx="44.900909"
+   inkscape:cy="20.879451"
    inkscape:window-x="65"
    inkscape:window-y="24"
    inkscape:window-maximized="1"
@@ -58,4 +58,27 @@
    id="path9"
    inkscape:connector-curvature="0"
    style="fill:#000000" />
+<text
+   xml:space="preserve"
+   style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+   x="31.819805"
+   y="2.7465053"
+   id="text3213"
+   sodipodi:linespacing="125%"><tspan
+     sodipodi:role="line"
+     id="tspan3215"
+     x="31.819805"
+     y="2.7465053" /></text>
+<text
+   xml:space="preserve"
+   style="font-size:23.45749283px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+   x="34.828014"
+   y="59.584435"
+   id="text3217"
+   sodipodi:linespacing="125%"><tspan
+     sodipodi:role="line"
+     id="tspan3219"
+     x="34.828014"
+     y="59.584435"
+     style="font-size:1.75931215px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffffff;font-family:PT Sans;-inkscape-font-specification:PT Sans Bold Italic">Промежуточный сервер</tspan></text>
 </svg>

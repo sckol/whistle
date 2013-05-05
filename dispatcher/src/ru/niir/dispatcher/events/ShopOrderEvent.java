@@ -1,6 +1,6 @@
 package ru.niir.dispatcher.events;
 
-public class ShopOrderEvent implements DispatcherEvent {
+public class ShopOrderEvent implements DispatcherEvent, Jsonable {
 	private final double price;
 	private final String position;
 	private final int positionId;
@@ -31,6 +31,7 @@ public class ShopOrderEvent implements DispatcherEvent {
 				positionId, price);
 	}
 
+	@Override
 	public String toJson() {
 		return String.format("{\"type\": \"ShopOrderEvent\", "
 				+ "\"position\": \"%s\", " + "\"positionId\": \"%d\", "

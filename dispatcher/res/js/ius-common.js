@@ -1,7 +1,5 @@
 $$ = {};
-
 $(document).ready(function(){
-    var svgRoot = document.getElementById("svg").contentDocument.documentElement
     $.fn.fill = function(color) {
 	return this.each(function() {
 	    return $(this).css("fill", color);
@@ -31,9 +29,6 @@ $(document).ready(function(){
 	return this.each(function() {
 	    $(this).css("cursor", "default");
 	});
-    }
-    $$.$ = function(path) {
-	return $(path, svgRoot);
     }
     $$.hideEach = function(key, value) {
 	value.hide();
@@ -88,25 +83,5 @@ $(document).ready(function(){
     }
     var marqueeList={};
     var marquee=0;
-    $$.mainLayer = $$.$("#main-layer");
-    $$.entryLayer = $$.$("#entry-layer");
-    $([$$.mainLayer, $$.entryLayer]).each($$.hideEach);
-    $$.mainLayer.show();
-    $$.signBtn = $$.$("#sign-btn");
-    $$.shopTrigger = $$.$("#shop-trigger");
-    $$.shopCardTextIcon = $$.$("#shop-card-texticon");
-    $$.shopServerLine = $$.$("#shop-server-line");
-    $$.govServerLine = $$.$("#gov-server-line");
-    $$.bankServerLine = $$.$("#bank-server-line");
-    $$.eviServerLine = $$.$("#evi-server-line");
-    $$.serverEncapsLine = $$.$("#server-encaps-line");
-    $$.towerTvLine = $$.$("#tower-tv-line");
-    $$.backChannelLine = $$.$("#back-channel-line");
-    $$.encapsTowerLine = $$.$("#encaps-tower-line");
-    
-    $$.towerWavesArray=[$$.$("#wave0"), $$.$("#wave1"), $$.$("#wave2"), $$.$("#wave3")];
-    $$.remoteWavesArray=[$$.$("#remote-wave0"), $$.$("#remote-wave1")];
-    $$.shopCardInTvIcon=$$.$("#shop-card-in-tv-icon");
     window.setInterval($$.marqueeUpdtate, 100);
-    slideActions();
 });

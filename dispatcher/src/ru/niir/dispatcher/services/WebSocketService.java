@@ -10,15 +10,12 @@ import org.eclipse.jetty.websocket.WebSocket;
 import org.eclipse.jetty.websocket.WebSocket.Connection;
 import org.eclipse.jetty.websocket.WebSocketServlet;
 
-import ru.niir.dispatcher.events.ContentChangedEvent;
 import ru.niir.dispatcher.events.DispatcherEvent;
-import ru.niir.dispatcher.events.ShopOrderEvent;
-import ru.niir.dispatcher.events.ShopSubmittedEvent;
+import ru.niir.dispatcher.events.Jsonable;
 
 @SuppressWarnings("serial")
 public class WebSocketService extends WebSocketServlet implements
 		DispatcherService {
-
 
 	private final Set<Connection> members = new CopyOnWriteArraySet<WebSocket.Connection>();
 
@@ -30,17 +27,17 @@ public class WebSocketService extends WebSocketServlet implements
 
 	@Override
 	public void onEvent(final DispatcherEvent _event) {
-		if (_event instanceof ContentChangedEvent || _event instanceof ShopOrderEvent) {
-			for (Connection connection : members) {
+		for (Connection connection : members) {
+			if (_event instanceof Jsonable) {
 				try {
-					connection.sendMessage(((ShopOrderEvent) _event).toJson());
+					connection.sendMessage(((Jsonable) _event).toJson());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}			
+			}
 		}
 	}
-	
+
 	private class Notifier implements WebSocket {
 		private Connection connection;
 

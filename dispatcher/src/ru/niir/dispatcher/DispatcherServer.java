@@ -2,7 +2,9 @@ package ru.niir.dispatcher;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 import java.util.Timer;
 
 import org.eclipse.jetty.server.Server;
@@ -10,9 +12,16 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.smslib.AGateway;
+import org.smslib.GatewayException;
+import org.smslib.IInboundMessageNotification;
+import org.smslib.InboundMessage;
+import org.smslib.OutboundMessage;
 import org.smslib.SMSLibException;
 import org.smslib.Service;
 import org.smslib.TimeoutException;
+import org.smslib.InboundMessage.MessageClasses;
+import org.smslib.Message.MessageTypes;
 import org.smslib.modem.SerialModemGateway;
 
 import ru.niir.dispatcher.agents.ConsoleAgent;
@@ -127,6 +136,7 @@ public class DispatcherServer {
 				smslibService = getSmsService(conf);
 			smslibService
 					.setInboundMessageNotification(new SmsInboundMessageAgent(
+							bus, smslibService,
 							conf.getProperty("SmsInboundMessageAgent.menuFile")));
 		}
 		handlerList.addHandler(context);
@@ -150,10 +160,23 @@ public class DispatcherServer {
 			InterruptedException {
 		final Service service = Service.getInstance();
 		SerialModemGateway gateway1 = new SerialModemGateway("modem1",
-				conf.getProperty("Sms.comPort"), 9600, "Siemens", "MC35i");
+				conf.getProperty("Sms.comPort"), Integer.parseInt(conf
+						.getProperty("Sms.baudRate")), "Siemens", "MC35i");
 		gateway1.setOutbound(true);
+		gateway1.setInbound(true);
 		service.addGateway(gateway1);
 		service.startService();
+		deleteAllSmsMessages(service);
 		return service;
+	}
+
+	private static final void deleteAllSmsMessages(final Service service)
+			throws TimeoutException, GatewayException, IOException,
+			InterruptedException {
+		final Set<InboundMessage> msgs = new HashSet<InboundMessage>();
+		service.readMessages(msgs, MessageClasses.ALL);
+		for (InboundMessage msg : msgs) {
+			service.deleteMessage(msg);
+		}
 	}
 }
