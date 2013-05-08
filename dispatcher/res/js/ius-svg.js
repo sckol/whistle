@@ -21,4 +21,5 @@ $(document).ready(function() {
     $$.towerWavesArray=[$$.$("#wave0"), $$.$("#wave1"), $$.$("#wave2"), $$.$("#wave3")];
     $$.remoteWavesArray=[$$.$("#remote-wave0"), $$.$("#remote-wave1")];
     $$.shopCardInTvIcon=$$.$("#shop-card-in-tv-icon");
+    $$.compass = $$.$('#compass');
 });

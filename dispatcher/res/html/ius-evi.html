@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Информационно-управленческая сеть</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/ius.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container">
+      <h3 class="muted">Информационно-управленческая сеть</h3>
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <ul class="nav">
+              <li><a href="ius-entry.html">Вход в ИУС</a></li>
+              <li><a href="ius-service.html">Оказание услуг</a></li>
+              <li><a href="ius-mgmt.html">Администрирование услуг</a></li>
+              <li class="active"><a href="ius-evi.html">Передача ЭВИ</a></li>
+            </ul>
+          </div>
+        </div>
+      </div><!-- /.navbar -->
+
+      <div class="carousel slide">
+        <div class="carousel-inner">
+          <div class="active item">
+            <object data="http://localhost:8089/svg/ius.svg" id="svg" type="image/svg+xml">
+            </object>
+            <div class="jumbotron">
+              <a id="demontration-btn" class="btn btn-large btn-success" href="#">Демонстрация</a>
+            </div>
+          </div><!--div class="active item"-->
+          <div class="item">
+	    <div class="jumbotron">
+	      <label>Введите количество пакетов:</label>
+	      <div class="input-append">
+		  <input id="test-input" type="number" value="1000">
+		  <button id="test-btn" type="submit" class="btn">Начать тест</button>
+	      </div>
+	    </div>
+          </div>
+        </div><!--div class="carousel-inner"-->
+      </div><!--div class="carousel"-->
+      <hr>
+      <footer class="muted">
+        <p>&copy; ФГУП НИИР, 2013</p>
+      </footer>
+    </div>
+
+    <!-- Le javascript
+         ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/jquery.svg.js"></script>
+    <!--script type="text/javascript" src="../js/jquery.svgfilter.js"></script-->
+    <!--script type="text/javascript" src="../js/jquery.svgdom.js"></script-->
+    <script type="text/javascript" src="../js/jquery.svganim.js"></script>
+
+    <script src="../js/ius-common.js"></script>
+    <script src="../js/ius-svg.js"></script>
+    <script src="../js/ius-evi.js"></script>
+  </body>
+</html>

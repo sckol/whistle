@@ -18,6 +18,17 @@ footer {
     font-size: 21px;
     padding: 14px 24px;
 }
+.jumbotron input {
+    height: 40px;
+    width:120px;
+    font-size: 30px;
+}
+.jumbotron label {
+    color:#444;
+    font-size: 35px;
+    margin-bottom:25px;
+    
+}
 
 /* Customize the navbar links to be fill the entire space of the .navbar */
 .navbar .navbar-inner {
