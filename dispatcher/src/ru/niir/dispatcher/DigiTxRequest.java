@@ -6,6 +6,7 @@ import com.rapplogic.xbee.api.XBeeRequest;
 import com.rapplogic.xbee.api.zigbee.ZNetTxRequest;
 import com.rapplogic.xbee.util.IntArrayOutputStream;
 
+@SuppressWarnings("serial")
 public class DigiTxRequest extends XBeeRequest {
 	public final static int ZNET_MAX_PAYLOAD_SIZE = 72;
 	public final static int DEFAULT_BROADCAST_RADIUS = 0;

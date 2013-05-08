@@ -8,6 +8,6 @@ public class ShopComplaintEvent implements DispatcherEvent, Jsonable {
 
 	@Override
 	public String toJson() {
-		return String.format("{\"type\": \"ShopComplaintEvent\"\"}");
+		return String.format("{\"type\": \"ShopComplaintEvent\"}");
 	}	
 }

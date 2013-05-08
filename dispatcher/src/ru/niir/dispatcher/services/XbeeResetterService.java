@@ -6,6 +6,7 @@ import com.rapplogic.xbee.api.XBeeException;
 
 import ru.niir.dispatcher.DigiTxRequest;
 import ru.niir.dispatcher.events.DispatcherEvent;
+import ru.niir.dispatcher.events.ExitEvent;
 import ru.niir.dispatcher.events.ResetEvent;
 
 public class XbeeResetterService implements DispatcherService {
@@ -25,6 +26,8 @@ public class XbeeResetterService implements DispatcherService {
 			} catch (XBeeException e) {
 				e.printStackTrace();
 			}
+		} else if (_event instanceof ExitEvent) {
+			xbee.close();
 		}
 	}
 }

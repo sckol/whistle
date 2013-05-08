@@ -7,6 +7,7 @@ import java.util.TimerTask;
 import ru.niir.dispatcher.EventBus;
 import ru.niir.dispatcher.NodeType;
 import ru.niir.dispatcher.events.DispatcherEvent;
+import ru.niir.dispatcher.events.ExitEvent;
 import ru.niir.dispatcher.events.ScannerResultsEvent;
 import ru.niir.dispatcher.events.SensorDetectedEvent;
 
@@ -54,6 +55,8 @@ public class XBeeScannerService implements DispatcherService {
 			final NodeType nodeType = parseNodeType(event.getSensorName());
 			if (nodeType != null)
 				scannerResults.put(event.getSensorId(), nodeType);
+		} else if (_event instanceof ExitEvent) {
+			xbee.close();
 		}
 	}
 

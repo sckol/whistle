@@ -867,7 +867,7 @@
 							<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">Параметры</div></td>
 							<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">Описание</div></td>
 							<td class="adm-list-table-cell"><div class="adm-list-table-cell-inner">Комментарии</div></td>
-						</tr><tr class="adm-list-table-row  complaint-row" id="newcomplaint" style="display:none;">
+						</tr><tr class="adm-list-table-row  complaint-row" id="myid_6" style="sdisplay:none;">
 								<td class="adm-list-table-cell">05.05.2013 11:16:00</td>
 								<td class="adm-list-table-cell">
  <a href="http://1331.bitrixlabs.ru/bitrix/admin/sale_buyers_profile.php?USER_ID=1&amp;lang=ru">Поглазов П.С.</a>								</td>
@@ -876,7 +876,7 @@
 								<td class="adm-list-table-cell">
 									Получена жалоба								</td>
 								<td class="adm-list-table-cell" align="right">
-								  Заказ не был доставлен клиенту<a href="../bitrix3/index.html">(Посмотреть другие жалобы на поставщика)</a>				</td>
+								  Заказ не был доставлен клиенту<a href=".">(Посмотреть другие жалобы на поставщика)</a>				</td>
 							</tr>
 													<tr class="adm-list-table-row" id="myid_5">
 								<td class="adm-list-table-cell">05.05.2013 11:15:00</td>

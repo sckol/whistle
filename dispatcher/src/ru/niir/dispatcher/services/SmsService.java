@@ -12,6 +12,7 @@ import org.smslib.Service;
 import ru.niir.dispatcher.Phone;
 import ru.niir.dispatcher.agents.SmsOutboundMessageAgent.SmsAgentTask;
 import ru.niir.dispatcher.events.DispatcherEvent;
+import ru.niir.dispatcher.events.ExitEvent;
 import ru.niir.dispatcher.events.StateChangedEvent;
 import ru.niir.dispatcher.events.StateChangedEvent.EmergencyType;
 
@@ -24,9 +25,11 @@ public class SmsService implements DispatcherService {
 		this.smsService = smsService;
 		smsService.setQueueSendingNotification(new IQueueSendingNotification() {
 			@Override
-			public void process(final AGateway gateway, final OutboundMessage msg) {
-				System.out.println("Message " + msg.getText() + " sent " + msg.getMessageStatus() + 
-						" from " + gateway.getGatewayId() + " to " + msg.getRecipient());
+			public void process(final AGateway gateway,
+					final OutboundMessage msg) {
+				System.out.println("Message " + msg.getText() + " sent "
+						+ msg.getMessageStatus() + " from "
+						+ gateway.getGatewayId() + " to " + msg.getRecipient());
 			}
 		});
 	}
@@ -38,10 +41,11 @@ public class SmsService implements DispatcherService {
 			final boolean firstNotify = event.getOldState() == 0;
 			final PriorityQueue<SmsAgentTask> transaction = new PriorityQueue<SmsAgentTask>();
 			for (Phone phone : phones) {
-				transaction.add(new SmsAgentTask(phone.getNumber(), phone	
-						.getPort(), "(emergency " + typeToInt(event.getType()) + " " + (event.getNewState() - 1)
-						+ ")", firstNotify ? phone.getNotifyPriority() : phone
-						.getStateUpdatePriority()));
+				transaction.add(new SmsAgentTask(phone.getNumber(), phone
+						.getPort(), "(emergency " + typeToInt(event.getType())
+						+ " " + (event.getNewState() - 1) + ")",
+						firstNotify ? phone.getNotifyPriority() : phone
+								.getStateUpdatePriority()));
 			}
 			for (SmsAgentTask task : transaction) {
 				final OutboundMessage message = new OutboundMessage(
@@ -51,13 +55,21 @@ public class SmsService implements DispatcherService {
 				message.setFlashSms(true);
 				smsService.queueMessage(message);
 			}
+		} else if (_event instanceof ExitEvent) {
+			try {
+				smsService.stopService();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	
-	private static int typeToInt (final EmergencyType type) {
+
+	private static int typeToInt(final EmergencyType type) {
 		switch (type) {
-		case FIRE: return 0;
-		case GAS_ATTACK: return 1;
+		case FIRE:
+			return 0;
+		case GAS_ATTACK:
+			return 1;
 		}
 		return 0;
 	}

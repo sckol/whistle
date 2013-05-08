@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.snmp4j.CommunityTarget;
 import org.snmp4j.PDU;
 import org.snmp4j.Snmp;
-import org.snmp4j.event.ResponseEvent;
 import org.snmp4j.mp.SnmpConstants;
 import org.snmp4j.smi.GenericAddress;
 import org.snmp4j.smi.OID;
@@ -14,6 +13,7 @@ import org.snmp4j.smi.VariableBinding;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
 
 import ru.niir.dispatcher.events.DispatcherEvent;
+import ru.niir.dispatcher.events.ExitEvent;
 import ru.niir.dispatcher.events.StateChangedEvent;
 import ru.niir.dispatcher.events.StateChangedEvent.EmergencyType;
 
@@ -53,6 +53,12 @@ public class SnmpService implements DispatcherService {
 					}
 				}
 			}).start();
+		} else if (_event instanceof ExitEvent) {
+			try {
+				snmp.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

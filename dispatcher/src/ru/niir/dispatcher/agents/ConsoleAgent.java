@@ -5,10 +5,14 @@ import java.util.Scanner;
 
 import ru.niir.dispatcher.EventBus;
 import ru.niir.dispatcher.NodeType;
+import ru.niir.dispatcher.events.ExitEvent;
 import ru.niir.dispatcher.events.ResetEvent;
 import ru.niir.dispatcher.events.ScannerResultsEvent;
 import ru.niir.dispatcher.events.SensorChangedEvent;
+import ru.niir.dispatcher.events.ShopComplaintEvent;
 import ru.niir.dispatcher.events.ShopOrderEvent;
+import ru.niir.dispatcher.events.ShopSubmittedEvent;
+import ru.niir.dispatcher.events.UserLocationChangedEvent;
 
 public class ConsoleAgent implements Runnable {
 	private final EventBus eventBus;
@@ -20,7 +24,6 @@ public class ConsoleAgent implements Runnable {
 
 	@Override
 	public void run() {
-		@SuppressWarnings("resource")
 		final Scanner scanner = new Scanner(System.in);
 		while (true) {
 			final String[] s = scanner.nextLine().split(" ");
@@ -47,6 +50,33 @@ public class ConsoleAgent implements Runnable {
 				try {
 					eventBus.fireEvent(new ShopOrderEvent(s[1], Integer
 							.parseInt(s[2]), Double.parseDouble(s[3])));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (s[0].equals("shop-submit")) {
+				try {
+					eventBus.fireEvent(new ShopSubmittedEvent());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (s[0].equals("shop-complaint")) {
+				try {
+					eventBus.fireEvent(new ShopComplaintEvent());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (s[0].equals("location")) {
+				try {
+					eventBus.fireEvent(new UserLocationChangedEvent(s[1]));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (s[0].equals("exit")) {
+				try {
+					eventBus.fireEvent(new ExitEvent());
+					scanner.close();
+					System.out.println("Exiting");
+					System.exit(0);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

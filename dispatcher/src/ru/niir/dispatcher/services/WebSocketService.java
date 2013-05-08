@@ -11,6 +11,7 @@ import org.eclipse.jetty.websocket.WebSocket.Connection;
 import org.eclipse.jetty.websocket.WebSocketServlet;
 
 import ru.niir.dispatcher.events.DispatcherEvent;
+import ru.niir.dispatcher.events.ExitEvent;
 import ru.niir.dispatcher.events.Jsonable;
 
 @SuppressWarnings("serial")
@@ -35,6 +36,9 @@ public class WebSocketService extends WebSocketServlet implements
 					e.printStackTrace();
 				}
 			}
+		}
+		if (_event instanceof ExitEvent) {
+			this.destroy();
 		}
 	}
 

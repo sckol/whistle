@@ -12,16 +12,12 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.smslib.AGateway;
 import org.smslib.GatewayException;
-import org.smslib.IInboundMessageNotification;
 import org.smslib.InboundMessage;
-import org.smslib.OutboundMessage;
+import org.smslib.InboundMessage.MessageClasses;
 import org.smslib.SMSLibException;
 import org.smslib.Service;
 import org.smslib.TimeoutException;
-import org.smslib.InboundMessage.MessageClasses;
-import org.smslib.Message.MessageTypes;
 import org.smslib.modem.SerialModemGateway;
 
 import ru.niir.dispatcher.agents.ConsoleAgent;
@@ -29,6 +25,7 @@ import ru.niir.dispatcher.agents.ServerRequestAgent;
 import ru.niir.dispatcher.agents.SmsInboundMessageAgent;
 import ru.niir.dispatcher.agents.XBeeAgent;
 import ru.niir.dispatcher.events.ResetEvent;
+import ru.niir.dispatcher.services.BluetoothService;
 import ru.niir.dispatcher.services.DvbService;
 import ru.niir.dispatcher.services.LoggerService;
 import ru.niir.dispatcher.services.SmsService;
@@ -114,8 +111,12 @@ public class DispatcherServer {
 			bus.addListener(new SnmpService());
 		}
 		if (conf.getProperty("Services.Dvb").equals("enable")) {
-			bus.addListener(new DvbService(conf
-					.getProperty("DvbService.controlFile")));
+			bus.addListener(new DvbService(conf.getProperty("Dvb.octavepath"),
+					conf.getProperty("Dvb.octaweWorkingDir")));
+		}
+		if (conf.getProperty("Services.Bluetooth").equals("enable")) {
+			bus.addListener(new BluetoothService(conf.getProperty("Bluetooth.comPort"),
+					Integer.parseInt(conf.getProperty("Bluetooth.baudrate"))));
 		}
 		if (conf.getProperty("Agents.Console").equals("enable")) {
 			new Thread(new ConsoleAgent(bus)).start();
