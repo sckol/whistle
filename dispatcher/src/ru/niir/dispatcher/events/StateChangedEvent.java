@@ -26,6 +26,10 @@ public class StateChangedEvent implements DispatcherEvent {
 		return type;
 	}
 
+	public String getReason() {
+		return reason;
+	}
+
 	@Override
 	public String toString() {
 		return "StateChangedEvent (newState=" + newState + ", oldState="

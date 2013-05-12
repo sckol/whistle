@@ -128,6 +128,7 @@ ul.custom-list li i {
 #monitor-object {
     margin: 20px auto 0 auto;
     width:800px;
+    height:700px;
     position:relative;
 }
 #monitor-object iframe {
@@ -149,4 +150,10 @@ ul.accordion-inner {
 }
 ul.accordion-inner li:before {
     content: " – "
+}
+
+#dispatcher {
+    display:block;
+    height: 800px;
+    margin:0 auto 0 auto;
 }

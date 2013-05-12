@@ -7,7 +7,7 @@ $(document).ready(function() {
     $("#demontration-btn").on("click", function demonstration() {
         carousel.carousel(1);
     });
-    bitrixRoot.load(function() {
+    bitrixRoot.on('load', function() {
         $$.reconnect();
         $$.wsMessageListener = function(m) {
             var msg = JSON.parse(m.data);
@@ -15,5 +15,9 @@ $(document).ready(function() {
                 $('#newcomplaint', bitrixRoot.contents()).show();
             }
         }
+        $('#shop-block', bitrixRoot.contents()).on('click', function() {
+            $.ajax("../cmd?cmd=complaint");
+            carousel.carousel(0);
+        });
     });
 });

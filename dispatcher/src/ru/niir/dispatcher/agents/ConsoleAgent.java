@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import ru.niir.dispatcher.EventBus;
 import ru.niir.dispatcher.NodeType;
+import ru.niir.dispatcher.events.EviRequestedEvent;
 import ru.niir.dispatcher.events.ExitEvent;
 import ru.niir.dispatcher.events.ResetEvent;
 import ru.niir.dispatcher.events.ScannerResultsEvent;
@@ -68,6 +69,12 @@ public class ConsoleAgent implements Runnable {
 			} else if (s[0].equals("location")) {
 				try {
 					eventBus.fireEvent(new UserLocationChangedEvent(s[1]));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (s[0].equals("evi")) {
+				try {
+					eventBus.fireEvent(new EviRequestedEvent(Integer.parseInt(s[1])));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

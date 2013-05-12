@@ -59,7 +59,6 @@ public class StateBoardService extends HttpServlet implements DispatcherService 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		System.out.println("!!!!!!");
 		resp.setContentType("text/html;charset=utf-8");
 		resp.setStatus(HttpServletResponse.SC_OK);
 		outputter.output(doc, resp.getOutputStream());

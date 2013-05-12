@@ -11,4 +11,9 @@ public class UserLocationChangedEvent implements DispatcherEvent {
 	public String getNewLocation() {
 		return newLocation;
 	}
+
+	@Override
+	public String toString() {
+		return "UserLocationChangedEvent(newLocation: " + newLocation + ")";
+	}
 }

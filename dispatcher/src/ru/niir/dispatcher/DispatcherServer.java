@@ -28,11 +28,13 @@ import ru.niir.dispatcher.events.ResetEvent;
 import ru.niir.dispatcher.services.BluetoothService;
 import ru.niir.dispatcher.services.DvbService;
 import ru.niir.dispatcher.services.LoggerService;
+import ru.niir.dispatcher.services.MeshLogicService;
 import ru.niir.dispatcher.services.SmsService;
 import ru.niir.dispatcher.services.SnmpService;
 import ru.niir.dispatcher.services.StateBoardService;
 import ru.niir.dispatcher.services.StateMonitorService;
 import ru.niir.dispatcher.services.SvgService;
+import ru.niir.dispatcher.services.TimerStateChangerService;
 import ru.niir.dispatcher.services.WebSocketService;
 import ru.niir.dispatcher.services.XBeeScannerService;
 import ru.niir.dispatcher.services.XbeeResetterService;
@@ -62,6 +64,9 @@ public class DispatcherServer {
 		}
 		if (conf.getProperty("Services.StateMonitor").equals("enable")) {
 			bus.addListener(new StateMonitorService(bus));
+		}
+		if (conf.getProperty("Services.TimerStateChanger").equals("enable")) {
+			bus.addListener(new TimerStateChangerService(bus));
 		}
 		if (conf.getProperty("Services.Svg").equals("enable")) {
 			final SvgService svgService = new SvgService(bus,
@@ -117,6 +122,13 @@ public class DispatcherServer {
 		if (conf.getProperty("Services.Bluetooth").equals("enable")) {
 			bus.addListener(new BluetoothService(conf.getProperty("Bluetooth.comPort"),
 					Integer.parseInt(conf.getProperty("Bluetooth.baudrate"))));
+		}
+		if (conf.getProperty("Services.MeshLogic").equals("enable")) {
+			final MeshLogicService meshLogicService = new MeshLogicService(bus, conf.getProperty("MeshLogic.comPort"),
+					Integer.parseInt(conf.getProperty("MeshLogic.baudrate")));
+			new Thread(meshLogicService).start();
+			bus.addListener(meshLogicService);
+			
 		}
 		if (conf.getProperty("Agents.Console").equals("enable")) {
 			new Thread(new ConsoleAgent(bus)).start();

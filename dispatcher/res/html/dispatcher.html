@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Система обеспечения индивидуальной безопасности</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/ius.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container">
+      <h3 class="muted">Система обеспечения индивидуальной безопасности</h3>
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+            <ul class="nav">
+              <li><a href="ius-entry.html">Вход в ИУС</a></li>
+              <li><a href="ius-service.html">Оказание услуг</a></li>
+              <li><a href="ius-mgmt.html">Администрирование услуг</a></li>
+              <li><a href="ius-evi.html">Передача ЭВИ</a></li>
+              <li class="active"><a href="dispatcher.html">СОИБ</a></li>
+            </ul>
+          </div>
+        </div>
+      </div><!-- /.navbar -->
+      <div class="row">
+        <div class="span4">
+          <h2><a href="" class="dashed">Внешняя тревога</a></h2>
+        </div>
+        <div class="span8">
+          <object data="http://localhost:8089/svg/plan.svg" id="dispatcher" type="image/svg+xml">
+          </object>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

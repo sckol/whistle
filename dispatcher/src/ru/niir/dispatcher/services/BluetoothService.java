@@ -6,7 +6,6 @@ import java.io.OutputStream;
 import ru.niir.dispatcher.events.DispatcherEvent;
 import ru.niir.dispatcher.events.ExitEvent;
 import ru.niir.dispatcher.events.ResetEvent;
-import ru.niir.dispatcher.events.SensorChangedEvent;
 import ru.niir.dispatcher.events.StateChangedEvent;
 import ru.niir.dispatcher.events.StateChangedEvent.EmergencyType;
 import ru.niir.dispatcher.events.UserLocationChangedEvent;
@@ -34,19 +33,28 @@ public class BluetoothService implements DispatcherService {
 	@Override
 	public void onEvent(DispatcherEvent _event) {
 		String s = null;
-		if (_event instanceof SensorChangedEvent) {
-			final SensorChangedEvent event = (SensorChangedEvent) _event;
-			s = String.format("alarm%s#", event.getSensorId());
-		} else if (_event instanceof StateChangedEvent) {
+		if (_event instanceof StateChangedEvent) {
 			final StateChangedEvent event = (StateChangedEvent) _event;
 			if (event.getType() == EmergencyType.GAS_ATTACK) {
-				s = "alarmout#";
+				s = "llarmout#100#";
+			} else {
+				switch (event.getNewState()) {
+				case 1:
+					s = String.format("llarm%s#", event.getReason(), event.getReason());
+					break;
+				case 2:
+					s = "aatastrofa1#";
+					break;
+				case 3:
+					s = "aatastrofa2#";
+					break;
+				}
 			}
 		} else if (_event instanceof UserLocationChangedEvent) {
 			final UserLocationChangedEvent event = (UserLocationChangedEvent) _event;
 			s = String.format("%s#", event.getNewLocation());
 		} else if (_event instanceof ResetEvent) {
-			s = "endalarm#";
+			s = "nnd#";
 		} else if (_event instanceof ExitEvent) {
 			port.close();
 		}

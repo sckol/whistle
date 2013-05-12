@@ -12,7 +12,7 @@ $(document).ready(function() {
 	    carousel.carousel(1);
     });
     $('#test-btn').on('click', function() {
-	$.ajax("../cmd?cmd=submitShop&packets=" + $("#test-input").val());
+	$.ajax("../cmd?cmd=testEvi&packets=" + $("#test-input").val());
 	carousel.carousel(0);
 	demBut.hide();
     });
