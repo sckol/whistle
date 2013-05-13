@@ -1,6 +1,6 @@
 package ru.niir.dispatcher.events;
 
-public class UserLocationChangedEvent implements DispatcherEvent {
+public class UserLocationChangedEvent implements DispatcherEvent, Jsonable {
 	private final String newLocation;
 
 	public UserLocationChangedEvent(String newLocation) {
@@ -15,5 +15,11 @@ public class UserLocationChangedEvent implements DispatcherEvent {
 	@Override
 	public String toString() {
 		return "UserLocationChangedEvent(newLocation: " + newLocation + ")";
+	}
+
+	@Override
+	public String toJson() {
+		return String.format("{\"type\": \"UserLocationChangedEvent\", "
+				+ "\"newLocation\": \"%s\"}", newLocation);
 	}
 }

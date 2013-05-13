@@ -1,7 +1,6 @@
 package ru.niir.dispatcher.events;
 
-
-public class SensorChangedEvent implements DispatcherEvent {
+public class SensorChangedEvent implements DispatcherEvent, Jsonable {
 	private final String sensorId;
 	private final int buttonPressed;
 
@@ -21,8 +20,14 @@ public class SensorChangedEvent implements DispatcherEvent {
 
 	@Override
 	public String toString() {
-		return "SensorChanged Event(sens#" + sensorId + ", but#" + buttonPressed + ")"; 
+		return "SensorChanged Event(sens#" + sensorId + ", but#"
+				+ buttonPressed + ")";
 	}
-	
-	
+
+	@Override
+	public String toJson() {
+		return String.format("{\"type\": \"SensorChangedEvent\", "
+				+ "\"sensorId\": \"%s\", " + "\"buttonPressed\": \"%d\"}",
+				sensorId, buttonPressed);
+	}
 }

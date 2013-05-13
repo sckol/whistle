@@ -1,6 +1,6 @@
 package ru.niir.dispatcher.events;
 
-public class StateChangedEvent implements DispatcherEvent {
+public class StateChangedEvent implements DispatcherEvent, Jsonable {
 	private final int newState, oldState;
 	private final String reason;
 	private final EmergencyType type;
@@ -36,6 +36,22 @@ public class StateChangedEvent implements DispatcherEvent {
 				+ oldState + ", type=" + type + ", reason=\"" + reason + "\")";
 	}
 	public enum EmergencyType {
-		FIRE, GAS_ATTACK
+		FIRE("FIRE"), GAS_ATTACK("GAS_ATTACK");
+		EmergencyType(final String message) {
+			this.message = message;
+		}
+		private final String message;
+
+		public String getMessage() {
+			return message;
+		}
+	}
+
+	@Override
+	public String toJson() {
+		return String.format("{\"type\": \"StateChangedEvent\", "
+				+ "\"newState\": \"%d\",\"oldState\": \"%d\", "
+				+ "\"reason\": \"s\", \"emergencyType\": \"%s\"}", newState, oldState,
+				reason, type.getMessage());
 	}
 }
