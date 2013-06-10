@@ -1,0 +1,50 @@
+.indented {
+    margin-left:20px;
+}
+.total {
+  font-weight: bold;
+  border-top: 1px solid;
+}
+.total td {
+    padding-top: 10px;
+}
+
+.nav-tabs {
+    margin-left: 40px;
+    font-size: 18px;
+}
+h1 {
+    width:700px;
+    margin:15px auto 40px auto;
+}
+.pane {
+    margin-top: 80px;
+    box-shadow: 3px 3px 10px 0px; rgba(0,0,0,200);
+    padding: 2px 10px 10px 15px;
+}
+.pane:nth-child(1) {
+    margin-top: 0px;
+}
+object {
+    border-left: 1px solid #cccccc;
+    position:relative;
+    top: -20px;
+    left:20px;
+    margin-left: 20px;
+}
+.control-link {
+    border-bottom: 1px dashed;
+    line-height: 30px;
+    font-weight: bold;
+}
+.hint {
+    border:2px dashed;
+    border-radius: 5px;
+    padding:10px;
+    background-color: #e4faff;
+    margin-top:60px;
+    margin-left:10px;
+}
+.stateboard {
+    background-color: #ccffcc
+}

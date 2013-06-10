@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Диспетчерский программный комплекс «СОИБ-Д»</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/control.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1 class="text-center">Диспетчерский программный комплекс «СОИБ-Д»</h1>
+    <div class="container">
+      <div class="row">
+        <div class="span3">
+          <div class="pane stateboard">
+            <h3>Информация</h3>
+            <p>Состояние: <span>нет тревоги</span></p>
+            <table>
+              <tr><td><p class="indented">Посетителей:</p></td><td><p>4</p></td></tr>
+              <tr><td><p class="indented">Служащих:</p></td><td><p>2</p></td></tr>
+              <tr><td><p class="indented">Лиц с ограниченными возможностями:</p></td><td><p>1</p></td></tr>
+              <tr class="total"><td><p>Всего:</p></td><td><p>6</p></td></tr>
+            </table>
+          </div>
+          <div class="pane">
+            <h3>Выбор объекта</h3>
+            <a>2-й этаж, производственный цех</a>
+          </div>
+          <div class="pane">
+            <h3>Действия</h3>
+            <div><a class="control-link">Объявить тревогу</a></div>
+            <div><a class="control-link">Сформировать отчет</a></div>
+            <div><a class="control-link">Изменить настройки</a></div>
+          </div>
+        </div>
+        <div class="span9">
+          <ul class="nav nav-tabs">
+            <li class="active">
+              <a href="#">План</a>
+            </li>
+            <li><a href="#">Журнал</a></li>
+          </ul>
+          <div class="row tab-inner">
+            <div class="span6">
+              <object
+                 data="http://localhost:8089/svg/plan-control.svg" id="plan" type="image/svg+xml">
+              </object>
+            </div>
+            <div class="span3">
+              <div class="hint">
+                <h5>Информация о комнате</h5>
+                <table>
+                  <tr><td><p class="indented">Посетителей:</p></td><td><p>4</p></td></tr>
+                  <tr><td><p class="indented">Служащих:</p></td><td><p>2</p></td></tr>
+                  <tr><td><p class="indented">Лиц с ограниченными возможностями:</p></td><td><p>1</p></td></tr>
+                  <tr class="total"><td><p>Всего:</p></td><td><p>6</p></td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <footer class="muted text-center">
+        <p>&copy; ФГУП НИИР, ОАО «Автоэлектроника», 2013</p>
+      </footer>
+    </div>
+  </body>
+</html>

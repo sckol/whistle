@@ -1,7 +1,13 @@
 package ru.niir.dispatcher;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
@@ -25,6 +31,7 @@ import ru.niir.dispatcher.agents.ServerRequestAgent;
 import ru.niir.dispatcher.agents.SmsInboundMessageAgent;
 import ru.niir.dispatcher.agents.XBeeAgent;
 import ru.niir.dispatcher.events.ResetEvent;
+import ru.niir.dispatcher.gui.Console;
 import ru.niir.dispatcher.services.BluetoothService;
 import ru.niir.dispatcher.services.DvbService;
 import ru.niir.dispatcher.services.LoggerService;
@@ -45,6 +52,26 @@ import com.rapplogic.xbee.api.XBeeException;
 
 public class DispatcherServer {
 	public static void main(String[] args) throws Exception {
+		System.out.println("Hello world");
+		new Console();	
+		System.out.println("Working Directory = " +
+	              System.getProperty("user.dir"));
+		
+        
+        addLibraryPath(new File("lin32").getAbsolutePath());
+        addLibraryPath(new File("lin64").getAbsolutePath());
+        addLibraryPath(new File("win32").getAbsolutePath());
+        addLibraryPath(new File("win64").getAbsolutePath());
+		
+		ClassLoader cl = ClassLoader.getSystemClassLoader();
+		 
+        URL[] urls = ((URLClassLoader)cl).getURLs();
+ 
+        for(URL url: urls){
+        	System.out.println(url.getFile());
+        }
+
+        
 		final Properties conf = new Properties();
 		conf.load(new FileInputStream("dispatcher.conf"));
 		final EventBus bus = new EventBus();
@@ -191,5 +218,31 @@ public class DispatcherServer {
 		for (InboundMessage msg : msgs) {
 			service.deleteMessage(msg);
 		}
+	}
+	
+	/**
+	* Adds the specified path to the java library path
+	*
+	* @param pathToAdd the path to add
+	* @throws Exception
+	*/
+	public static void addLibraryPath(String pathToAdd) throws Exception{
+	    final Field usrPathsField = ClassLoader.class.getDeclaredField("usr_paths");
+	    usrPathsField.setAccessible(true);
+	 
+	    //get array of paths
+	    final String[] paths = (String[])usrPathsField.get(null);
+	 
+	    //check if the path to add is already present
+	    for(String path : paths) {
+	        if(path.equals(pathToAdd)) {
+	            return;
+	        }
+	    }
+	 
+	    //add the new path
+	    final String[] newPaths = Arrays.copyOf(paths, paths.length + 1);
+	    newPaths[newPaths.length-1] = pathToAdd;
+	    usrPathsField.set(null, newPaths);
 	}
 }
