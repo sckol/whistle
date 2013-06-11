@@ -12,62 +12,128 @@
     <link href="../css/control.css" rel="stylesheet">
   </head>
   <body>
-    <h1 class="text-center">Диспетчерский программный комплекс «СОИБ-Д»</h1>
-    <div class="container">
-      <div class="row">
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <img style="float:left;margin: 10px 30px 10px 10px;"  src="../img/ae.png"/>
+        <img style="float:left;margin: 10px 30px 10px 10px;" heigth="30px" src="../img/niir.png"/>
+        <div style="float:right;margin-top:50px;"><a href="help.html">Помощь</a> | <a href="070@niir.ru">Связаться с разработчиками</a></div></div>
+      <div style="position:relative;height:25px;font-weight:bold;  background-color:#ff6d06;margin-bottom:10px;padding:5px 0 0px 15px; font-size:16px;color:white;border-radius:10px;">
+        Диспетчерский программный комплекс «СОИБ-Д»
+      </div>
+      <div class="row-fluid">
         <div class="span3">
+          <div class="selector">
+            <ul class="custom-list">
+              <li class="active"><i class="icon white-icon icon-eye-open"></i>Мониторинг</li>
+              <li><i class="icon white-icon icon-pencil"></i>Журнал</li>
+            </ul>
+          </div>
           <div class="pane stateboard">
-            <h3>Информация</h3>
+            <h3>Статус объекта</h3>
             <p>Состояние: <span>нет тревоги</span></p>
-            <table>
-              <tr><td><p class="indented">Посетителей:</p></td><td><p>4</p></td></tr>
-              <tr><td><p class="indented">Служащих:</p></td><td><p>2</p></td></tr>
-              <tr><td><p class="indented">Лиц с ограниченными возможностями:</p></td><td><p>1</p></td></tr>
-              <tr class="total"><td><p>Всего:</p></td><td><p>6</p></td></tr>
+            <table class="user-count">
+              <tr>
+                <td class="td-icon"><img src="../img/icon-user.png"/></td>
+                <td>Посетителей:</td>
+                <td class="td-count">4</td>
+              </tr>
+              <tr>
+                <td class="td-icon"><img src="../img/icon-guard.png"/></td>
+                <td>Служащих:</td>
+                <td class="td-count">4</td>
+              </tr>
+              <tr>
+                <td class="td-icon"><img src="../img/icon-disabled.png"/></td>
+                <td>Лиц с ограниченными возможностями:</td>
+                <td class="td-count">4</td>
+              </tr>
+            </table>
+            <table class="total">
+              <tr>
+                <td>Всего:</td>
+                <td class="td-count">12</td>
+              </tr>
             </table>
           </div>
-          <div class="pane">
+          <div class="pane object-switcher">
             <h3>Выбор объекта</h3>
-            <a>2-й этаж, производственный цех</a>
+            <ul class="custom-list">
+              <li><i class="icon icon-chevron-right"></i><a>2-й этаж, производственный цех</a></li>
+            </ul>
           </div>
-          <div class="pane">
+          <div class="pane actions">
             <h3>Действия</h3>
-            <div><a class="control-link">Объявить тревогу</a></div>
-            <div><a class="control-link">Сформировать отчет</a></div>
-            <div><a class="control-link">Изменить настройки</a></div>
+            <ul class="custom-list">
+              <li><img src="../img/icon-bell.png"/><a class="control-link">Объявить тревогу</a></li>
+              <li><img src="../img/icon-report.png"/><a class="control-link">Сформировать отчет</a></li>
+              <li><img src="../img/icon-gears.png"/><a class="control-link">Изменить настройки</a></li>
+            </ul>
           </div>
         </div>
         <div class="span9">
-          <ul class="nav nav-tabs">
-            <li class="active">
-              <a href="#">План</a>
-            </li>
-            <li><a href="#">Журнал</a></li>
-          </ul>
-          <div class="row tab-inner">
-            <div class="span6">
-              <object
-                 data="http://localhost:8089/svg/plan-control.svg" id="plan" type="image/svg+xml">
-              </object>
-            </div>
-            <div class="span3">
-              <div class="hint">
-                <h5>Информация о комнате</h5>
-                <table>
-                  <tr><td><p class="indented">Посетителей:</p></td><td><p>4</p></td></tr>
-                  <tr><td><p class="indented">Служащих:</p></td><td><p>2</p></td></tr>
-                  <tr><td><p class="indented">Лиц с ограниченными возможностями:</p></td><td><p>1</p></td></tr>
-                  <tr class="total"><td><p>Всего:</p></td><td><p>6</p></td></tr>
+          <h2>План объекта</h2>
+          <div class="span7">
+            <object
+               data="http://localhost:8089/svg/plan-control.svg" id="plan" type="image/svg+xml">
+            </object>
+          </div>
+          <div class="span3">
+	    <div class="hint hint1">
+	      <div class="hint-header">
+		Комната № 206
+		<i class="icon icon-remove"></i>
+	      </div>
+              <div class="hint-inner">
+                <p>Состояние: <span>безопасно</span></p>
+                <table class="user-count">
+                  <tr>
+                    <td class="td-large-icon"><img src="../img/icon-large-user.png"/></td>
+                    <td class="td-large-icon"><img src="../img/icon-large-guard.png"/></td>
+                    <td class="td-large-icon"><img src="../img/icon-large-disabled.png"/></td>
+                    <td class="td-large-icon total-vertical"><img src="../img/icon-large-sum.png"/></td>
+                  </tr>
+                  <tr class="room-count">
+                    <td>3</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td class="total-vertical">8</td>
+                  </tr>
                 </table>
               </div>
             </div>
+
+	    <div class="hint hint2">
+	      <div class="hint-header">
+		Комната № 208
+		<i class="icon icon-remove"></i>
+	      </div>
+              <div class="hint-inner">
+                <p>Состояние: <span>безопасно</span></p>
+                <table class="user-count">
+                  <tr>
+                    <td class="td-large-icon"><img src="../img/icon-large-user.png"/></td>
+                    <td class="td-large-icon"><img src="../img/icon-large-guard.png"/></td>
+                    <td class="td-large-icon"><img src="../img/icon-large-disabled.png"/></td>
+                    <td class="td-large-icon total-vertical"><img src="../img/icon-large-sum.png"/></td>
+                  </tr>
+                  <tr class="room-count">
+                    <td>4</td>
+                    <td>6</td>
+                    <td>2</td>
+                    <td class="total-vertical">9</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+	    
           </div>
         </div>
       </div>
-      <hr>
-      <footer class="muted text-center">
-        <p>&copy; ФГУП НИИР, ОАО «Автоэлектроника», 2013</p>
-      </footer>
     </div>
-  </body>
+    <hr>
+    <footer class="muted text-center">
+      <p>&copy; ФГУП НИИР, ОАО «Автоэлектроника», 2013</p>
+    </footer>
+</div>
+</body>
 </html>

@@ -1,12 +1,14 @@
-.indented {
-    margin-left:20px;
-}
 .total {
-  font-weight: bold;
-  border-top: 1px solid;
+    width:100%;
+    font-weight: bold;
+    border-top: 1px solid;
+    padding-top:0px;
 }
 .total td {
     padding-top: 10px;
+}
+.total-vertical {
+    border-left: 1px solid;
 }
 
 .nav-tabs {
@@ -17,34 +19,120 @@ h1 {
     width:700px;
     margin:15px auto 40px auto;
 }
-.pane {
-    margin-top: 80px;
-    box-shadow: 3px 3px 10px 0px; rgba(0,0,0,200);
-    padding: 2px 10px 10px 15px;
+
+h3 {
+    font-size: 16px;
+    line-height:20px;
 }
-.pane:nth-child(1) {
+.pane {
+    margin-top:20px;
+    padding: 5px 5px 10px 5px;
+    border-radius:7px;
+}
+ul.custom-list {
+    margin: 0;
+    list-style:none;
+}
+ul.custom-list a {
+    color:black;
+    text-decoration: underline;
+}
+.selector li {
+    background:#f7f7f7;
+    color:black;
+    padding: 4px 5px 4px 5px;
+    font-size: 14px;
+    line-height:20px;
+    margin-top: 2px;
+    border: solid #d7d7d7 1px;
+    border-radius: 7px;
+}
+.selector li a {
+    display:block;
+}
+.custom-list li i, .custom-list li img {
+    margin-right:10px;
+}
+.selector li.active {
+    background: #696969;
+    color:white;
+    font-weight:bold;
+}
+.selector li.active i {
+    background-image: url("../img/glyphicons-halflings-white.png");
+}
+.selector:nth-child(1) {
     margin-top: 0px;
 }
 object {
-    border-left: 1px solid #cccccc;
     position:relative;
     top: -20px;
-    left:20px;
+    left:-20px;
     margin-left: 20px;
 }
 .control-link {
-    border-bottom: 1px dashed;
     line-height: 30px;
-    font-weight: bold;
+}
+.stateboard, .object-switcher, .actions {
+    background-color: #eeeeee;
+    border: 1px #d7d7d7 solid;
+}
+.td-icon {
+    width: 30px;
+}
+.td-large-icon {
+    width: 80px;
+}
+.td-count {
+    text-align:right;
+    padding-right:10px;
+}
+
+.user-count td {
+    height: 40px;
+    text-align:center;
+}
+.room-count td {
+    font-size: 40px;
+    padding-top: 10px;
+}
+.hint-header {
+    background-color:#696969;
+    color:white;
+    margin:0;
+    padding:5px 15px;
+    border-top-left-radius:4px;
+    border-top-right-radius:4px;
+    font-size:16px;
+    font-weight:bold;
 }
 .hint {
-    border:2px dashed;
-    border-radius: 5px;
-    padding:10px;
-    background-color: #e4faff;
-    margin-top:60px;
-    margin-left:10px;
+    background-color:#fefefe;
+    border: solid #bbbbbb 1px;
+    padding:0;
+    border-top-left-radius:4px;
+    border-top-right-radius:4px;
+    width: 250px;
+    position:fixed;
+    right:60px;
+
 }
-.stateboard {
-    background-color: #ccffcc
+.hint-inner {
+    padding-bottom: 10px;
+}
+.hint-inner p {
+    margin: 5px 10px 10px 10px;
+}
+.hint1 {
+    top:180px;
+}
+h2 {
+    margin-left: 40px;
+}
+.hint2 {
+    top:380px;
+}
+i.icon-remove {
+    float:right;
+    margin-top:3px;
 }
