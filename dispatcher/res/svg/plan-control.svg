@@ -10,7 +10,7 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   viewBox="0 0 354.33069 566.92914"
+   viewBox="0 0 344.14397 521.62541"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
@@ -39,8 +39,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="150.53405"
-     inkscape:cy="334.2583"
+     inkscape:cx="146.77824"
+     inkscape:cy="319.21022"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -56,14 +56,20 @@
      inkscape:snap-grids="true"
      inkscape:snap-to-guides="true"
      showguides="true"
-     inkscape:guide-bbox="true">
+     inkscape:guide-bbox="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
     <inkscape:grid
        type="xygrid"
        id="grid2985"
        empspacing="5"
        visible="true"
        enabled="true"
-       snapvisiblegridlinesonly="true" />
+       snapvisiblegridlinesonly="true"
+       originx="-3.755813px"
+       originy="-15.048079px" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -81,7 +87,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-485.43306)">
+     transform="translate(-3.7558131,-515.68871)">
     <path
        style="fill:none;stroke:#000000;stroke-width:1.95124638;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        d="m 302.20177,516.82639 -280.276038,0 -0.959188,519.51211"
@@ -609,7 +615,8 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Layer"
-     style="display:inline">
+     style="display:inline"
+     transform="translate(-3.7558131,-30.255653)">
     <rect
        style="fill:#55ddff;fill-opacity:0.15525118;fill-rule:evenodd;stroke:none"
        id="rect3102"
@@ -699,12 +706,12 @@
        sodipodi:cy="210.92914"
        sodipodi:rx="12"
        sodipodi:ry="12"
-       d="m 248,210.92914 a 12,12 0 1 1 -24,0 12,12 0 1 1 24,0 z"
+       d="m 248,210.92914 c 0,6.62742 -5.37258,12 -12,12 -6.62742,0 -12,-5.37258 -12,-12 0,-6.62742 5.37258,-12 12,-12 6.62742,0 12,5.37258 12,12 z"
        transform="matrix(0.99428162,0,0,0.99428162,41.781306,-29.655436)"
        inkscape:label="#path3304" />
     <path
        transform="matrix(0.99428162,0,0,0.99428162,-193.86344,251.72627)"
-       d="m 248,210.92914 a 12,12 0 1 1 -24,0 12,12 0 1 1 24,0 z"
+       d="m 248,210.92914 c 0,6.62742 -5.37258,12 -12,12 -6.62742,0 -12,-5.37258 -12,-12 0,-6.62742 5.37258,-12 12,-12 6.62742,0 12,5.37258 12,12 z"
        sodipodi:ry="12"
        sodipodi:rx="12"
        sodipodi:cy="210.92914"
