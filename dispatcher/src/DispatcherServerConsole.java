@@ -45,7 +45,6 @@ import com.rapplogic.xbee.api.XBeeException;
 
 public class DispatcherServerConsole {
 	public static void main(String[] args) throws Exception {
-		System.out.println("Hello world");
 		new Console();
 //		final Properties conf = new Properties();
 //		conf.load(new FileInputStream("dispatcher.conf"));

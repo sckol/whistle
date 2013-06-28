@@ -29,7 +29,7 @@ public class Console extends WindowAdapter implements WindowListener,  ActionLis
 	public Console()
 	{
 		// create all components and add them
-		frame=new JFrame("ПДК «СОИБ-Д»");
+		frame=new JFrame("ПДК «СИНАПС-Д»");
 		Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frameSize=new Dimension((int)(screenSize.width/2),(int)(screenSize.height/2));
 		int x=(int)(frameSize.width/2);
